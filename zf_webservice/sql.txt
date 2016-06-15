@@ -1,0 +1,8 @@
+alter table sfjghhb add (jfyf varchar2(2));
+
+----webservice密码表
+create table wsmmb(
+  xscxjkmm varchar2(40),  --学生查询
+  jfjkmm varchar2(40)    --缴费
+);  
+

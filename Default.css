@@ -1,0 +1,218 @@
+/* Default CSS Stylesheet for a new Web Application project */
+
+A:link {
+	COLOR: #0000ff; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #0000ff; TEXT-DECORATION: none
+}
+A:active {
+	COLOR: #990000; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #006633; TEXT-DECORATION: underline
+}
+
+
+/* HTML 元素*/
+body, input, td, span, div,button, select, textarea
+{
+    font-family: 宋体;
+    font-size:9pt;
+}
+
+hr
+{
+   height:1; color:silver;}
+
+table
+{border-collapse:collapse }
+
+
+/*页面中的台头*/
+.BodyHeader
+{
+    font-weight: bold;
+    font-size: 34pt;
+    border-bottom: #1862AD 2pt solid;
+    font-family: 方正姚体, 方正舒体, 汉鼎繁海报, 黑体, 楷体_GB2312;
+    white-space:nowrap;
+}
+
+.BodyHeader2
+{
+    font-weight: bold;
+    font-size: 34pt;
+    font-family: 方正姚体, 方正舒体, 汉鼎繁海报, 黑体, 楷体_GB2312;
+    white-space:nowrap;
+}
+
+.BodyTitle
+{
+    Border:1pt solid #808080; background-color:#C0FFC0; Width:100%; padding:3pt;}
+
+.Hr1
+{
+    Height:2; Color:#1862AD;
+}
+/*需要将页面中的一些 LinkButton 的样式设置成 Button 的样子*/
+.button
+{
+    border: 1.5pt outset;
+    font-size: 9pt;
+    font-family: 宋体;
+    height: 16.5pt;
+    background-color: buttonface;
+    text-align: center;
+    padding-top:3px;
+    padding-left:8px;
+    padding-right:8px;
+    color:Black;
+    word-break : keep-all 
+}
+
+A.button:link {
+	COLOR: #000000; TEXT-DECORATION: none; cursor:default
+}
+A.button:visited {
+	COLOR: #000000; TEXT-DECORATION: none; cursor:default
+}
+A.button:active {
+	COLOR: #000000; TEXT-DECORATION: none; cursor:default
+}
+A.button:hover{
+	COLOR: #000000; TEXT-DECORATION: none; cursor:default
+}
+
+/*设置页*/
+NoFace
+{
+    word-break: keep-all}
+.SelectedTabStrip A.NoFace:link {
+	COLOR: #000000; TEXT-DECORATION: none; cursor:hand
+}
+.SelectedTabStrip A.NoFace:visited {
+	COLOR: #000000; TEXT-DECORATION: none; cursor:hand
+}
+.SelectedTabStrip A.NoFace:active {
+	COLOR: #000000; TEXT-DECORATION: none; cursor:hand
+}
+.SelectedTabStrip A.NoFace:hover{
+	COLOR: #000000; TEXT-DECORATION: none; cursor:hand
+}
+
+.TabStrip A.NoFace:link {
+	COLOR: #FFFFFF; TEXT-DECORATION: none; cursor:hand
+}
+.TabStrip A.NoFace:visited {
+	COLOR: #FFFFFF; TEXT-DECORATION: none; cursor:hand
+}
+.TabStrip A.NoFace:active {
+	COLOR: #FFFFFF; TEXT-DECORATION: none; cursor:hand
+}
+.TabStrip A.NoFace:hover{
+	COLOR: #FFFFFF; TEXT-DECORATION: none; cursor:hand
+}
+
+    
+.TabStrip
+{
+    background-color:#365390; color:#FFFFFF; BORDER-left:1px solid #0A246A; BORDER-top:1px solid #0A246A; BORDER-bottom:1px solid #0A246A; BORDER-right:1px solid #0A246A; border-right:none; padding-top:2pt; padding-bottom:2pt; padding-left:6pt; padding-right:6pt; text-align:center}
+
+.SelectedTabStrip
+{
+    BORDER-left:1px solid #0A246A; BORDER-top:1px solid #0A246A; BORDER-bottom:none; BORDER-right:1px solid #0A246A; border-right:none; padding-top:2pt; padding-bottom:2pt; padding-left:6pt; padding-right:6pt; text-align:center}
+
+.TabSeparator
+{
+    border-left:1px solid #0A246A; border-bottom:1px solid #0A246A;}
+  
+.MultiPage
+{
+    BORDER-left:1px solid #0A246A; BORDER-bottom:1px solid #0A246A; BORDER-right:1px solid #0A246A; PADDING:4pt; BORDER-TOP:medium none; }
+
+ 
+/*设置文本换行或不换行*/
+
+.keepAll
+{
+   word-break : keep-all; white-space:nowrap}
+.breakAll
+{
+   word-break : break-all}
+   
+
+.Dialog
+{
+    background-color:#D4D0C8; border-left:1.5px outset; border-top:1.5 outset; border-right:1px solid #D4D0C8; border-bottom:1px solid #D4D0C8; margin:5px;
+    }
+.Dialog2
+{
+    border-left:1.5px outset; border-top:1.5 outset; border-right:1px solid #D4D0C8; border-bottom:1px solid #D4D0C8; margin:5px; overflow:auto;}
+    
+ /*设置菜单*/
+.subMenuBar {
+    visibility:hidden;
+    left:0;
+    background-color:#DFDFDF;
+    position:absolute;
+    border-bottom:1pt solid #8B8B8B; 
+    border-right:1pt solid #8B8B8B; cursor:hand;
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=85);}
+
+.MainMenuBar {
+    height:22;
+    background-color:#DFDFDF;
+    border:1pt solid #808080;}
+
+.MainMenu {cursor:hand; padding-left:12pt; padding-right:12pt}
+
+.MenuTd{background-image:url(Images/MenuTd.gif);}
+
+.SubMenu{padding:0pt;}
+
+.SubMenu A:link {
+	COLOR: #000000; TEXT-DECORATION: none; width:100%; padding:2pt; padding-left:14pt; padding-right:14pt
+}
+.SubMenu A:visited {
+	COLOR: #000000; TEXT-DECORATION: none; width:100%; padding:2pt; padding-left:14pt; padding-right:14pt
+}
+.SubMenu A:active {
+	COLOR: #000000; TEXT-DECORATION: none; width:100%; padding:2pt; padding-left:14pt; padding-right:14pt
+}
+.SubMenu A:hover {
+	COLOR: #000000; TEXT-DECORATION: none; width:100%; background-color:#8B8B8B; padding:2pt; padding-left:14pt; padding-right:14pt
+}
+.ToolBar {height:24; background-image:url(Images/MenuBg.gif); width:100%;}
+
+/*打印*/
+.HideOnPrint{}
+.RemoveOnPrint{}
+.ShowOnPrint{display:none}
+.PageNext{page-break-after: always;}
+
+/* others */
+
+.InputBox{border-bottom:1pt solid #F0F0F0; border-right:1pt solid #F0F0F0; border-top:1pt solid #808080; border-left:1pt solid #808080;}
+.ReadOnly{background-color:#F2F2F2;}
+.Button1{background-Color:#E5E5E5; border-bottom:1pt solid #999999; border-right:1pt solid #999999; border-top:1pt solid #F1F1F1; border-left:1pt solid #F1F1F1; padding-top:2pt}
+.SortTable
+{
+	behavior: url(tpml/SortTable.htc);
+	sortNoneImageUrl: images/sortBlank.gif;
+	sortUpImageUrl: images/sortUp.gif;
+	sortDownImageUrl: images/sortDown.gif;
+ 	font: menu;
+}
+
+.DBGrid td
+{
+    white-space:nowarp
+}
+.tb {
+	border-collapse:collapse;
+	}
+.tb td {
+border:1px #999 solid;
+padding:3px;
+}

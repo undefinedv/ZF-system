@@ -1,0 +1,1296 @@
+'Option Strict On
+Imports System.Data.OracleClient
+Imports System.IO
+Public Class xf_tocjbexcel
+    Inherits System.Web.UI.Page
+
+
+#Region " Web 窗体设计器生成的代码 "
+
+	'该调用是 Web 窗体设计器所必需的。
+	<System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
+
+	End Sub
+
+	Private Sub Page_Init(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Init
+		'CODEGEN: 此方法调用是 Web 窗体设计器所必需的
+		'不要使用代码编辑器修改它。
+		InitializeComponent()
+	End Sub
+
+#End Region
+
+	Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+		'在此处放置初始化页的用户代码
+        Dim objConnection As OracleConnection = New OracleConnection(ConfigurationSettings.AppSettings("MyConn") & jiemi(ConfigurationSettings.AppSettings("MyPwd"), str_jm))
+        Dim objCommand As OracleCommand
+        Dim objDataReader As OracleDataReader
+
+
+        Dim strSQLQuery, xkkhstr, filename, bmc_str, jfz_str, xkkh, xxmc, kkxy, kcmc, kcxz, jsxm, xf, rs, bjdm_table, bjdm_Column1, bjdm_Column2, bjdm_Column3, bjdm, bjmc, khfs, kcdm, cjbblb, tjcj As String
+        Dim i, j, v_rs As Integer
+        xkkhstr = Request.QueryString("xkkh")
+        bmc_str = Request.QueryString("bmc")
+        jfz_str = Request.QueryString("jfz")
+        cjbblb = Request.QueryString("cjbblb1")
+
+        filename = "excel/" & Request.QueryString("printType") & xkkhstr & ".xls"
+
+
+        '如果存在了文件则删除
+        If File.Exists(Server.MapPath(filename)) Then
+            File.Delete(Server.MapPath(filename))
+        End If
+
+
+        'Response.Write(cjbblb + "%" + Request.QueryString("printType"))
+        ' Response.End()
+
+
+        '‘成绩模板（顺序：2.4，1，1）
+        '‘网上打印期中 控制开关
+        Dim Kg_wsdyqz As String = getstr("select Kg_wsdyqz from xxmc")
+        If (Request.QueryString("printType") = "2") Or (Request.QueryString("printType") = "4") Then
+            '格式2和格式4
+
+            '网上打印期中成绩
+            If Kg_wsdyqz = "1" Then
+                If str_xxmc = "西华大学" Then
+                    File.Copy(Server.MapPath("tpml/xf_qz_cjb2_xhdx.xls"), Server.MapPath(filename))
+                Else
+                    File.Copy(Server.MapPath("tpml/xf_qz_cjb2.xls"), Server.MapPath(filename))
+                End If
+
+            Else
+                File.Copy(Server.MapPath("tpml/xf_cjb2.xls"), Server.MapPath(filename))
+            End If
+
+            '格式1
+        ElseIf Request.QueryString("printType") = "1" Then
+            '网上打印期中成绩
+            Try
+                If Kg_wsdyqz = "1" Then
+                    File.Copy(Server.MapPath("tpml/xf_qz_cjb1" & cjbblb & ".xls"), Server.MapPath(filename))
+                Else
+                    File.Copy(Server.MapPath("tpml/xf_cjb1" & cjbblb & ".xls"), Server.MapPath(filename))
+                End If
+            Catch ex As Exception
+                File.Copy(Server.MapPath("tpml/xf_cjb.xls"), Server.MapPath(filename))
+            End Try
+
+        ElseIf Request.QueryString("printType") = "3" Then
+            '格式3   试卷分析 用万里学院？？？？？？？？？？？？？
+            File.Copy(Server.MapPath("tpml/wlxy.xls"), Server.MapPath(filename))
+        End If
+        '‘’以下为特殊的摸板
+        If Request.QueryString("printType") = "2" And str_xxmc = "中国矿业大学" Then
+            '如果存在了文件则删除
+            If File.Exists(Server.MapPath(filename)) Then
+                File.Delete(Server.MapPath(filename))
+            End If
+
+            If Kg_wsdyqz = "1" Then '网上打印期中成绩 
+                File.Copy(Server.MapPath("tpml/xf_qz_cjb2_zgkd.xls"), Server.MapPath(filename))
+            Else
+                File.Copy(Server.MapPath("tpml/xf_cjb2_zgkd.xls"), Server.MapPath(filename))
+            End If
+        End If
+
+
+        '==========华南师范大学====================
+        If (Request.QueryString("printType") <> "3") And (str_xxmc = "华南师范大学") Then
+            '格式不为三   华南师范大学（特殊情况）
+            If File.Exists(Server.MapPath(filename)) Then
+                File.Delete(Server.MapPath(filename))
+            End If
+
+            If Kg_wsdyqz = "1" Then
+                File.Copy(Server.MapPath("tpml/xf_qz_cjb2_hnsf.xls"), Server.MapPath(filename))
+            Else
+                File.Copy(Server.MapPath("tpml/xf_cjb2_hnsf.xls"), Server.MapPath(filename))
+            End If
+
+        End If
+        '==========================================
+
+        '=== 浙江科技学院  试卷情况分析表==========
+        If Request.QueryString("printType") = "3" And str_xxmc = "浙江科技学院" Then
+            If File.Exists(Server.MapPath(filename)) Then
+                File.Delete(Server.MapPath(filename))
+            End If
+            File.Copy(Server.MapPath("tpml/kjxy.xls"), Server.MapPath(filename))
+        End If
+        '=======================================
+
+        '========sjf=======
+        '=== 宁波工程学院  试卷情况分析表==========
+        If Request.QueryString("printType") = "3" And str_xxmc = "宁波工程学院" Then
+            If File.Exists(Server.MapPath(filename)) Then
+                File.Delete(Server.MapPath(filename))
+            End If
+            File.Copy(Server.MapPath("tpml/nbgc.xls"), Server.MapPath(filename))
+        End If
+        '==========================================
+
+        '=== 西南民族大学  试卷情况分析表==========
+        If Request.QueryString("printType") = "3" And str_xxmc = "西南民族大学" Then
+            If File.Exists(Server.MapPath(filename)) Then
+                File.Delete(Server.MapPath(filename))
+            End If
+            File.Copy(Server.MapPath("tpml/xnmz.xls"), Server.MapPath(filename))
+        End If
+        '=====================进行各个模式的摸板的设定（61-150）====================
+
+
+        '‘’格式四的时候只针对学院的不细化到班级
+
+        If Request.QueryString("printType") = "4" Then
+            bjdm_table = "xydmb"
+            bjdm_Column1 = "xy"
+            bjdm_Column2 = "xymc"
+            bjdm_Column3 = "xydm"
+        Else
+            bjdm_table = "bjdmb"
+            bjdm_Column1 = "xzb"
+            bjdm_Column2 = "bjmc"
+            bjdm_Column3 = "bjdm"
+        End If
+
+
+        '====定义execl开始=============
+        Dim xlApp As New Excel.Application
+        Dim xlBook As Excel.Workbook
+        Dim xlSheet As Excel.Worksheet
+
+        xlBook = xlApp.Workbooks.Open(Server.MapPath(filename))
+        xlSheet = xlBook.Worksheets("sheet1")
+
+        strSQLQuery = "select tjcj from xxmc"
+        tjcj = getstr(strSQLQuery)
+
+        strSQLQuery = "select kcmc,kkxy,jsxm,xf, khfs, kcdm,kcxz from jxrwbview where xkkh='" & xkkhstr & "'"
+        '’=============定义各种表头文字===========
+        xxmc = str_xxmc & Mid(xkkhstr, 2, 9) & "学年第" & Mid(xkkhstr, 12, 1) & "学期成绩登记表"
+
+        objConnection.Open()
+        objCommand = New OracleCommand(strSQLQuery, objConnection)
+        objDataReader = objCommand.ExecuteReader
+        xkkh = "选课课号：" & xkkhstr
+        While objDataReader.Read()
+            If Not IsDBNull(objDataReader.Item(0)) Then
+                kcmc = "课程名称：" & CStr(objDataReader.Item(0))
+            Else
+                kcmc = "课程名称："
+            End If
+            If Not IsDBNull(objDataReader.Item(1)) Then
+                kkxy = "开课学院：" & CStr(objDataReader.Item(1))
+            Else
+                kkxy = "开课学院："
+            End If
+            If Not IsDBNull(objDataReader.Item(2)) Then
+                jsxm = "任课教师：" & CStr(objDataReader.Item(2))
+            Else
+                jsxm = "任课教师："
+            End If
+
+            If Not IsDBNull(objDataReader.Item(3)) Then
+                xf = "学分：" & CStr(objDataReader.Item(3))
+            Else
+                xf = "学分："
+            End If
+
+            If Not IsDBNull(objDataReader.Item(4)) Then
+                khfs = "考核方式：" & CStr(objDataReader.Item(4))
+            Else
+                khfs = "考核方式："
+            End If
+
+            If Not IsDBNull(objDataReader.Item(5)) Then
+                kcdm = "课程代码：" & CStr(objDataReader.Item(5))
+            Else
+                kcdm = "课程代码："
+            End If
+            If Not IsDBNull(objDataReader.Item(6)) Then
+                kcxz = "课程性质：" & CStr(objDataReader.Item(6))
+            Else
+                kcxz = "课程性质："
+            End If
+
+        End While
+        objCommand.Dispose()
+        objDataReader.Dispose()
+
+        '’====判断是打印的成绩单是针对班级的还是针对专业的在getbjmc里面=======
+        bjdm = CStr(Request.QueryString("BJDM"))
+        If Trim(bjdm) <> "" Then
+            bjmc = GetBjmc(bjdm, objConnection, Request.QueryString("printType"))
+        Else
+            bjmc = jsxm
+        End If
+
+
+        '===========================================================
+        '================================================
+        '==============(起始结束行：222-777)============试卷分析=============
+        If Request.QueryString("printType") = "3" Then
+            tjcj = getstr("select tjcj_sjfx from xxmc")
+            Dim strselect, rsstr As String
+            If Trim(bjdm) <> "" Then
+                strSELECT = "SELECT COUNT(a.xh) FROM " & bmc_str & " a,xsjbxxb b, " & bjdm_table & " c WHERE a.xh=b.xh AND a.xkkh='" & xkkhstr & "' AND b." & bjdm_Column1 & "=c." & bjdm_Column2 & " AND c." & bjdm_Column3 & "='" & bjdm & "'"
+            Else
+                strSELECT = "SELECT COUNT(a.xh) FROM " & bmc_str & " a WHERE a.xkkh='" & xkkhstr & "' "
+            End If
+            rsstr = getstr(strSELECT)
+
+            '======================试卷分析去掉  缺考 ，缓考，免修  人数=====
+            strSELECT = strselect & " and (a.bz = '缺考' or a.bz = '缓考' or a.bz = '免修')"
+            rsstr = CStr(CInt(rsstr)) - getstr(strSELECT)
+            '================================================================
+
+            '=== =================浙江科技学院  试卷情况分析表=======（237-）============================================================================================
+            If str_xxmc = "浙江科技学院" Then
+
+                xlSheet.Cells(1, 1) = "浙江科技学院试卷情况分析表"
+                'xlSheet.Cells(2, 2) = jsxm.Substring(6, jsxm.Length)
+                'xlSheet.Cells(2, 6) = System.DateTime.Now.Year & " 年"
+                'xlSheet.Cells(2, 7) = System.DateTime.Now.Month & " 月"
+                'xlSheet.Cells(2, 8) = System.DateTime.Now.Day & " 日"
+                xlSheet.Cells(2, 1) = "试卷分析人：" & jsxm.Substring(5, jsxm.Length - 5) & "           填表日期：" & System.DateTime.Now.Year & " 年  " & System.DateTime.Now.Month & " 月  " & System.DateTime.Now.Day & " 日"
+
+                xlSheet.Cells(3, 2) = kcmc.Substring(5, kcmc.Length - 5)
+                xlSheet.Cells(4, 2) = jsxm.Substring(5, jsxm.Length - 5)
+
+                ' 班级名称 ，选择了班级显示一个班级，没有选择显示所有选课的班级
+                If Trim(bjdm) <> "" Then
+                    xlSheet.Cells(5, 2) = Me.GetBjmc(bjdm, objConnection, "100").Substring(4, GetBjmc(bjdm, objConnection, "100").Length - 4)    ' 去掉 "行政班：" 几个字
+                Else
+                    Dim bjmcSql As String = "select distinct b.xzb from cjb a,xsjbxxb b where a.xh = b.xh and a.xkkh = '" & xkkhstr & "'"
+                    Dim bjmcList As String = ""
+
+                    objCommand = New OracleCommand(bjmcSql, objConnection)
+                    objDataReader = objCommand.ExecuteReader
+                    While objDataReader.Read()
+                        If Not IsDBNull(objDataReader.Item(0)) Then
+                            bjmcList = bjmcList & "  " & CStr(objDataReader.Item(0))
+                        End If
+                    End While
+                    xlSheet.Cells(5, 2) = bjmcList
+                End If
+
+                xlSheet.Cells(6, 1) = "应考人数：    " & rsstr & "          人"
+                Dim qkSql As String = strselect & "  and  a.bz = '缺考'"
+                'objCommand = New OracleCommand(qkSql, objConnection)
+                'Dim qkrsstr As String = CStr(objCommand.ExecuteScalar())
+                Dim qkrsstr As String = getstr(qkSql)
+                xlSheet.Cells(6, 5) = "缺考人数： " & qkrsstr & "  人"
+                xlSheet.Cells(6, 7) = "实考人数： " & CStr(CInt(rsstr) - CInt(qkrsstr)) & " 人"
+
+                '======最高分，最底分   都按 zscj 折算成绩统计
+                Dim fsSql As String
+                Dim fsSql_t As String
+
+                If Trim(bjdm) <> "" Then
+
+                    fsSql = "select a.zscj from " & bmc_str & " a ,xsjbxxb b ,bjdmb c where a.xkkh = '" & xkkhstr & "' and a.xh = b.xh and b.xzb = c.bjmc and c.bjdm = '" & bjdm & "'"
+
+                Else
+
+                    fsSql = "select a.zscj from " & bmc_str & "  a where a.xkkh = '" & xkkhstr & "'"
+
+                End If
+
+                fsSql_t = fsSql
+
+                fsSql = "select * from (" & fsSql_t & "  order by a.zscj desc) where rownum<=1"
+                xlSheet.Cells(7, 2) = "最高分： " & getstr(fsSql) & " 分"
+                fsSql = "select * from (" & fsSql_t & "  order by a.zscj asc) where rownum<=1"
+                xlSheet.Cells(9, 2) = "最低分： " & getstr(fsSql) & " 分"
+
+                If Trim(bjdm) <> "" Then
+
+                    fsSql = "select  count(a.xh) from " & bmc_str & " a ,xsjbxxb b ,bjdmb c where a.xkkh = '" & xkkhstr & "' and a.xh = b.xh and b.xzb = c.bjmc and c.bjdm = '" & bjdm & "'"
+
+                Else
+
+                    fsSql = "select  count(a.xh) from " & bmc_str & " a where a.xkkh = '" & xkkhstr & "'"
+
+                End If
+                fsSql_t = fsSql
+
+                '=====分数段统计
+
+                fsSql = fsSql_t & " and (a.zscj >=90) and (a.zscj >=0 and a.zscj <= 999999) "
+
+
+                'objCommand = New OracleCommand(fsSql, objConnection)
+                'rs = CStr(objCommand.ExecuteScalar())
+                rs = getstr(fsSql)
+                xlSheet.Cells(7, 4) = "90分（含90分）以上：  " & rs & "    人"
+                xlSheet.Cells(7, 7) = "比例：" & Format((CInt(rs) / CInt(rsstr)) * 100, "####0.00") & " %"
+                'objCommand.Dispose()
+
+
+                fsSql = fsSql_t & " and (a.zscj >=80 and a.zscj<=89) and (a.zscj >=0 and a.zscj <= 999999) "
+                'objCommand = New OracleCommand(fsSql, objConnection)
+                'rs = CStr(objCommand.ExecuteScalar())
+                rs = getstr(fsSql)
+                xlSheet.Cells(8, 4) = "80-89分：  " & rs & "    人"
+                xlSheet.Cells(8, 7) = "比例：" & Format((CInt(rs) / CInt(rsstr)) * 100, "####0.00") & " %"
+                'objCommand.Dispose()
+
+
+                fsSql = fsSql_t & " and (a.zscj >=70 and a.zscj<=79) and (a.zscj >=0 and a.zscj <= 999999) "
+                'objCommand = New OracleCommand(fsSql, objConnection)
+                'rs = CStr(objCommand.ExecuteScalar())
+                rs = getstr(fsSql)
+                xlSheet.Cells(9, 4) = "70-79分：  " & rs & "    人"
+                xlSheet.Cells(9, 7) = "比例：" & Format((CInt(rs) / CInt(rsstr)) * 100, "####0.00") & " %"
+                'objCommand.Dispose()
+
+
+                fsSql = fsSql_t & " and (a.zscj >=60 and a.zscj<=69) and (a.zscj >=0 and a.zscj <= 999999) "
+                'objCommand = New OracleCommand(fsSql, objConnection)
+                'rs = CStr(objCommand.ExecuteScalar())
+                rs = getstr(fsSql)
+                xlSheet.Cells(10, 4) = "60-69分：  " & rs & "    人"
+                xlSheet.Cells(10, 7) = "比例：" & Format((CInt(rs) / CInt(rsstr)) * 100, "####0.00") & " %"
+                'objCommand.Dispose()
+
+
+                fsSql = fsSql_t & " and (a.zscj<60) and (a.zscj >=0 and a.zscj <= 999999) "
+                'objCommand = New OracleCommand(fsSql, objConnection)
+                'rs = CStr(objCommand.ExecuteScalar())
+                rs = getstr(fsSql)
+                xlSheet.Cells(11, 4) = "60分以下：  " & rs & "    人"
+                xlSheet.Cells(11, 7) = "比例：" & Format((CInt(rs) / CInt(rsstr)) * 100, "####0.00") & " %"
+                'objCommand.Dispose()
+
+
+
+                '===释放资源
+                'objCommand.Dispose()
+                objDataReader.Dispose()
+
+                xlApp.Visible = False
+                objConnection.Dispose()
+                xlBook.Save()
+                xlBook.Close(True, Server.MapPath(filename), True)
+                ' xlApp.Quit()
+                xlBook = Nothing
+                xlApp = Nothing
+                xlSheet = Nothing
+                Response.Redirect(filename)
+
+                Return
+            End If
+            '=====浙江科技学院  试卷情况分析表（结束23-373行开始）==============================================================================================================================
+
+            '=== 西南民族大学  试卷情况分析表===================================================================================================
+            If str_xxmc = "西南民族大学" Then
+
+                xlSheet.Cells(1, 1) = "西南民族大学试卷分析报告"
+                '学年学期
+                xlSheet.Cells(2, 1) = "(" & xkkhstr.Substring(1, 11) & "学期)"
+                '课程信息
+                xlSheet.Cells(3, 2) = kcmc.Substring(5, kcmc.Length - 5)
+                xlSheet.Cells(3, 5) = kcdm.Substring(5, kcdm.Length - 5)
+                xlSheet.Cells(3, 9) = kcxz.Substring(5, kcxz.Length - 5)
+                xlSheet.Cells(3, 12) = xf.Substring(3, xf.Length - 3)
+
+                xlSheet.Cells(4, 2) = kkxy.Substring(5, kkxy.Length - 5)
+                xlSheet.Cells(4, 5) = jsxm.Substring(5, jsxm.Length - 5)
+
+                '选择班级，教学班代号 为班级名称；不选择班级，教学班代号 为选课课号
+                If Trim(bjdm) <> "" Then
+                    xlSheet.Cells(4, 9) = getstr("SELECT BJMC FROM BJDMB WHERE BJDM='" & Trim(bjdm) & "'")
+                Else
+                    xlSheet.Cells(4, 9) = xkkhstr
+                End If
+
+                xlSheet.Cells(4, 12) = rsstr
+
+                '考试信息
+                Dim ksxs As String = "开卷□   闭卷□"
+                Dim mtxs As String = "集体□   单独□"
+                Dim mtfzr As String = ""
+                Dim zc As String = ""
+                Dim sjSql As String
+                sjSql = "select a.ksxs,a.mtxs,b.xm ,b.zc from kssjcsszb a,jsxxb b,ks_sjbhb c where a.sjbh = c.sjbh and a.mtfzr = b.zgh and c.xkkh = '" & xkkhstr & "'"
+                objCommand = New OracleCommand(sjSql, objConnection)
+                objDataReader = objCommand.ExecuteReader
+
+                While objDataReader.Read()
+                    If Not IsDBNull(objDataReader.Item(0)) Then
+                        ksxs = CStr(objDataReader.Item(0))
+                    End If
+
+                    If Not IsDBNull(objDataReader.Item(1)) Then
+                        mtxs = CStr(objDataReader.Item(1))
+                    End If
+
+                    If Not IsDBNull(objDataReader.Item(2)) Then
+                        mtfzr = CStr(objDataReader.Item(2))
+                    End If
+
+                    If Not IsDBNull(objDataReader.Item(3)) Then
+                        zc = CStr(objDataReader.Item(3))
+                    End If
+                End While
+                xlSheet.Cells(5, 2) = ksxs
+                xlSheet.Cells(5, 5) = mtxs
+                xlSheet.Cells(5, 9) = mtfzr
+                xlSheet.Cells(5, 12) = zc
+
+                '===============================
+
+                Dim fsSql As String
+                Dim fsSql_t As String
+                If Trim(bjdm) <> "" Then
+                    fsSql = "select  count(a.xh) from " & bmc_str & " a ,xsjbxxb b ,bjdmb c where a.xkkh = '" & xkkhstr & "' and a.xh = b.xh and b.xzb = c.bjmc and c.bjdm = '" & bjdm & "'"
+                Else
+                    fsSql = "select  count(a.xh) from " & bmc_str & " a where a.xkkh = '" & xkkhstr & "'"
+                End If
+                fsSql_t = fsSql
+
+                '=====分数段统计
+                fsSql = fsSql_t & " and (a.zscj >=90) and (a.zscj >=0 and a.zscj <= 999999) "
+                'objCommand = New OracleCommand(fsSql, objConnection)
+                'rs = CStr(objCommand.ExecuteScalar())
+                rs = getstr(fsSql)
+                xlSheet.Cells(9, 7) = rs
+                xlSheet.Cells(10, 7) = Format((CInt(rs) / CInt(rsstr)) * 100, "####0.00") & " %"
+                'objCommand.Dispose()
+                fsSql = fsSql_t & " and (a.zscj >=80 and a.zscj<=89) and (a.zscj >=0 and a.zscj <= 999999) "
+                'objCommand = New OracleCommand(fsSql, objConnection)
+                'rs = CStr(objCommand.ExecuteScalar())
+                rs = getstr(fsSql)
+                xlSheet.Cells(9, 6) = rs
+                xlSheet.Cells(10, 6) = Format((CInt(rs) / CInt(rsstr)) * 100, "####0.00") & " %"
+                'objCommand.Dispose()
+
+
+                fsSql = fsSql_t & " and (a.zscj >=70 and a.zscj<=79) and (a.zscj >=0 and a.zscj <= 999999) "
+                'objCommand = New OracleCommand(fsSql, objConnection)
+                'rs = CStr(objCommand.ExecuteScalar())
+                rs = getstr(fsSql)
+                xlSheet.Cells(9, 5) = rs
+                xlSheet.Cells(10, 5) = Format((CInt(rs) / CInt(rsstr)) * 100, "####0.00") & " %"
+                'objCommand.Dispose()
+
+
+                fsSql = fsSql_t & " and (a.zscj >=60 and a.zscj<=69) and (a.zscj >=0 and a.zscj <= 999999) "
+                'objCommand = New OracleCommand(fsSql, objConnection)
+                'rs = CStr(objCommand.ExecuteScalar())
+                rs = getstr(fsSql)
+                xlSheet.Cells(9, 4) = rs
+                xlSheet.Cells(10, 4) = Format((CInt(rs) / CInt(rsstr)) * 100, "####0.00") & " %"
+                'objCommand.Dispose()
+
+
+                fsSql = fsSql_t & " and (a.zscj<60) and (a.zscj >=0 and a.zscj <= 999999) "
+                'objCommand = New OracleCommand(fsSql, objConnection)
+                'rs = CStr(objCommand.ExecuteScalar())
+                rs = getstr(fsSql)
+                xlSheet.Cells(9, 3) = rs
+                xlSheet.Cells(10, 3) = Format((CInt(rs) / CInt(rsstr)) * 100, "####0.00") & " %"
+                'objCommand.Dispose()
+
+                '=========合格率==========
+                xlSheet.Cells(12, 6) = Format((1 - CInt(rs) / CInt(rsstr)) * 100, "####0.00") & " %"
+                '=========================
+
+                '平均成绩==============
+                Dim str_avg As String
+                Try
+                    If Trim(bjdm) <> "" Then
+                        strSELECT = "SELECT sum(" & tjcj & ") FROM " & bmc_str & " a,xsjbxxb b, " & bjdm_table & " c WHERE a.xh=b.xh AND a.xkkh='" & xkkhstr & "' AND b." & bjdm_Column1 & "=c." & bjdm_Column2 & " AND c." & bjdm_Column3 & "='" & bjdm & "' and( " & tjcj & "<='99999' and " & tjcj & ">='0')"
+                    Else
+                        strSELECT = "SELECT sum(" & tjcj & ") FROM " & bmc_str & " a WHERE a.xkkh='" & xkkhstr & "' and( " & tjcj & "<='99999' and " & tjcj & ">='0')"
+                    End If
+                    'objCommand = New OracleCommand(strSELECT, objConnection)
+                    'rs = CStr(objCommand.ExecuteScalar())
+                    rs = getstr(fsSql)
+
+                    If Trim(bjdm) <> "" Then
+                        strSELECT = "SELECT count(a.xh) FROM " & bmc_str & " a,xsjbxxb b, " & bjdm_table & " c WHERE a.xh=b.xh AND a.xkkh='" & xkkhstr & "' AND b." & bjdm_Column1 & "=c." & bjdm_Column2 & " AND c." & bjdm_Column3 & "='" & bjdm & "' and( " & tjcj & "<='99999' and " & tjcj & ">='0')"
+                    Else
+                        strSELECT = "SELECT count(a.xh) FROM " & bmc_str & " a WHERE a.xkkh='" & xkkhstr & "' and( " & tjcj & "<='99999' and " & tjcj & ">='0')"
+                    End If
+
+                    'objCommand = New OracleCommand(strSELECT, objConnection)
+                    'rsstr = CStr(objCommand.ExecuteScalar())
+                    rs = getstr(fsSql)
+                    str_avg = Format((CDbl(rs) / CInt(rsstr)), "####0.00")
+                    xlSheet.Cells(12, 2) = str_avg
+                    'objCommand.Dispose()
+                Catch ex As Exception
+                End Try
+                '==================================================
+
+                '全距   最高分 - 最低分 ======================
+                If Trim(bjdm) <> "" Then
+
+                    fsSql = "select a.zscj from " & bmc_str & " a ,xsjbxxb b ,bjdmb c where a.xkkh = '" & xkkhstr & "' and a.xh = b.xh and b.xzb = c.bjmc and c.bjdm = '" & bjdm & "' and a.zscj is not null "
+
+                Else
+
+                    fsSql = "select a.zscj from " & bmc_str & "  a where a.xkkh = '" & xkkhstr & "' and a.zscj is not null "
+
+                End If
+                fsSql_t = fsSql
+
+                fsSql = "select * from (" & fsSql_t & "  order by a.zscj desc) where rownum<=1"
+                Dim zgs As Integer
+                Dim zds As Integer
+
+                '最高分
+                If (getstr(fsSql) = "") Then
+                    zgs = 0
+                Else
+                    zgs = CDbl(getstr(fsSql))
+                End If
+
+                '最低分
+                fsSql = "select * from (" & fsSql_t & "  order by a.zscj asc) where rownum<=1"
+                If (getstr(fsSql) = "") Then
+                    zds = 0
+                Else
+                    zds = CDbl(getstr(fsSql))
+                End If
+
+                xlSheet.Cells(12, 4) = CStr(zgs - zds)
+
+                '===释放资源
+                'objCommand.Dispose()
+                objDataReader.Dispose()
+
+                xlApp.Visible = False
+                objConnection.Dispose()
+                xlBook.Save()
+                xlBook.Close(True, Server.MapPath(filename), True)
+                ' xlApp.Quit()
+                xlBook = Nothing
+                xlApp = Nothing
+                xlSheet = Nothing
+                Response.Redirect(filename)
+
+                Return
+            End If
+            '===西南民族大学  试卷情况分析表 ============结束（376-566行开始）================================================================================================================
+
+
+
+
+
+            xlSheet.Cells(3, 2) = "(" & Mid(xkkhstr, 2, 9) & "学年第" & Mid(xkkhstr, 12, 1) & "学期)"
+            xlSheet.Cells(4, 2) = kcmc & "  " & kcdm & "  " & kcxz & "  " & xf
+            xlSheet.Cells(5, 2) = jsxm
+
+            ' xlSheet.Cells(5, 5) = "教学班代号：" & xkkhstr
+
+            '选择班级，教学班代号 为班级名称；不选择班级，教学班代号 为选课课号
+            If Trim(bjdm) <> "" Then
+                xlSheet.Cells(5, 5) = "教学班代号：" & getstr("SELECT BJMC FROM BJDMB WHERE BJDM='" & Trim(bjdm) & "'")
+            Else
+                xlSheet.Cells(5, 5) = "教学班代号：" & xkkhstr
+            End If
+
+            xlSheet.Cells(6, 7) = "人数：" & rsstr
+            v_rs = CInt(rsstr)
+
+
+
+            If jfz_str = "1" Then    '五级
+                If Trim(bjdm) <> "" Then
+                    If tjcj = "qmcj" Then
+                        'strSQLQuery = "SELECT a.qmcj, COUNT(a.xh), ROUND(COUNT(a.xh)/" & CStr(rsstr) & ",4)*100 FROM " & bmc_str & " a,xsjbxxb b, " & bjdm_table & " c WHERE a.xh=b.xh AND a.xkkh='" & xkkhstr & "' AND b." & bjdm_Column1 & "=c." & bjdm_Column2 & " AND c." & bjdm_Column3 & "='" & bjdm & "'  GROUP BY a.qmcj"
+
+                        strSQLQuery = "SELECT a.qmcj, COUNT(a.xh), ROUND(COUNT(a.xh)/" & CStr(rsstr) & ",4)*100 FROM " & bmc_str & " a,xsjbxxb b, " & bjdm_table & " c WHERE a.xh=b.xh AND a.xkkh='" & xkkhstr & "' AND b." & bjdm_Column1 & "=c." & bjdm_Column2 & " AND c." & bjdm_Column3 & "='" & bjdm & "' and ((a.bz <> '缺考' and a.bz <> '缓考' and a.bz <> '免修' or a.bz is null) ) GROUP BY a.qmcj"
+
+                    Else
+                        'strSQLQuery = "SELECT a.cj, COUNT(a.xh), ROUND(COUNT(a.xh)/" & CStr(v_rs) & ",4)*100 FROM " & bmc_str & " a,xsjbxxb b, " & bjdm_table & " c WHERE a.xh=b.xh AND a.xkkh='" & xkkhstr & "' AND b." & bjdm_Column1 & "=c." & bjdm_Column2 & " AND c." & bjdm_Column3 & "='" & bjdm & "'  GROUP BY a.cj"
+
+                        strSQLQuery = "SELECT a.cj, COUNT(a.xh), ROUND(COUNT(a.xh)/" & CStr(v_rs) & ",4)*100 FROM " & bmc_str & " a,xsjbxxb b, " & bjdm_table & " c WHERE a.xh=b.xh AND a.xkkh='" & xkkhstr & "' AND b." & bjdm_Column1 & "=c." & bjdm_Column2 & " AND c." & bjdm_Column3 & "='" & bjdm & "' and ((a.bz <> '缺考' and a.bz <> '缓考' and a.bz <> '免修' or a.bz is null) )  GROUP BY a.cj"
+
+                    End If
+                Else
+                    If tjcj = "qmcj" Then
+                        'strSQLQuery = "select qmcj,count(xh),round(count(xh)/" & CStr(rsstr) & ",4)*100 from " & bmc_str & " where xkkh='" & xkkhstr & "' group by qmcj"
+
+                        strSQLQuery = "select qmcj,count(xh),round(count(xh)/" & CStr(rsstr) & ",4)*100 from " & bmc_str & " where xkkh='" & xkkhstr & "' and ((bz <> '缺考' and bz <> '缓考' and bz <> '免修' or bz is null)) group by qmcj"
+
+                    Else
+                        'strSQLQuery = "select cj,count(xh),round(count(xh)/" & CStr(v_rs) & ",4)*100 from " & bmc_str & " where xkkh='" & xkkhstr & "' group by cj"
+
+                        strSQLQuery = "select cj,count(xh),round(count(xh)/" & CStr(v_rs) & ",4)*100 from " & bmc_str & " where xkkh='" & xkkhstr & "' and ((bz <> '缺考' and bz <> '缓考' and bz <> '免修' or bz is null) ) group by cj"
+
+                    End If
+                End If
+
+
+
+                objCommand = New OracleCommand(strSQLQuery, objConnection)
+                objDataReader = objCommand.ExecuteReader
+
+
+                Dim k As Integer    ' 用来“其他”栏目的人数
+                k = 0
+                While objDataReader.Read()
+                    If Not IsDBNull(objDataReader.Item(0)) Then
+                        If CStr(objDataReader.Item(0)) = "优秀" Then
+                            xlSheet.Cells(9, 4) = CStr(objDataReader.Item(1)) & "人"
+                            xlSheet.Cells(10, 4) = CStr(objDataReader.Item(2)) & "%"
+                        ElseIf CStr(objDataReader.Item(0)) = "良好" Then
+                            xlSheet.Cells(9, 5) = CStr(objDataReader.Item(1)) & "人"
+                            xlSheet.Cells(10, 5) = CStr(objDataReader.Item(2)) & "%"
+                        ElseIf CStr(objDataReader.Item(0)) = "中等" Then
+                            xlSheet.Cells(9, 6) = CStr(objDataReader.Item(1)) & "人"
+                            xlSheet.Cells(i + 5, 6) = CStr(objDataReader.Item(2)) & "%"
+                        ElseIf CStr(objDataReader.Item(0)) = "及格" Then
+                            xlSheet.Cells(9, 7) = CStr(objDataReader.Item(1)) & "人"
+                            xlSheet.Cells(10, 7) = CStr(objDataReader.Item(2)) & "%"
+                        ElseIf CStr(objDataReader.Item(0)) = "不及格" Then
+                            xlSheet.Cells(9, 8) = CStr(objDataReader.Item(1)) & "人"
+                            xlSheet.Cells(10, 9) = CStr(objDataReader.Item(2)) & "%"
+                        Else
+                            k = k + 1
+                        End If
+                    End If
+                End While
+
+                objCommand.Dispose()
+                objDataReader.Dispose()
+            Else
+                '  Dim strSELECT As String
+                If Trim(bjdm) <> "" Then
+                    strSELECT = "SELECT /*+ rule */ COUNT(a.xh) FROM " & bmc_str & " a,xsjbxxb b, " & bjdm_table & " c WHERE a.xh=b.xh AND a.xkkh='" & xkkhstr & "' AND b." & bjdm_Column1 & "=c." & bjdm_Column2 & " AND c." & bjdm_Column3 & "='" & bjdm & "'"
+                Else
+                    strSELECT = "SELECT /*+ rule */ COUNT(a.xh) FROM " & bmc_str & " a WHERE a.xkkh='" & xkkhstr & "' "
+                End If
+
+                '===============================
+                strSELECT = strSELECT & " and ((a.bz <> '缺考' and a.bz <> '缓考' and a.bz <> '免修' or a.bz is null) )"
+                '===============================
+
+                'strSQLQuery = strSELECT & " AND a.zscj>=90 "
+                strSQLQuery = strSELECT & " AND a." & tjcj & ">=90  and (" & tjcj & ">='0' AND " & tjcj & "<='999999')"
+                'objCommand = New OracleCommand(strSQLQuery, objConnection)
+                'rs = CStr(objCommand.ExecuteScalar())
+                rs = getstr(strSQLQuery)
+                xlSheet.Cells(9, 4) = rs & "人"
+                xlSheet.Cells(10, 4) = Format((CInt(rs) / CInt(rsstr)) * 100, "####0.00") & "%"
+                'objCommand.Dispose()
+
+
+
+                'strSQLQuery = strSELECT & " AND (zscj>=80 AND zscj<90)"
+                strSQLQuery = strSELECT & " AND (" & tjcj & ">=80 AND " & tjcj & "<90) and (" & tjcj & ">='0' AND " & tjcj & "<='999999')"
+                'objCommand = New OracleCommand(strSQLQuery, objConnection)
+                'rs = CStr(objCommand.ExecuteScalar())
+                rs = getstr(strSQLQuery)
+
+                xlSheet.Cells(9, 5) = rs & "人"
+                xlSheet.Cells(10, 5) = Format((CInt(rs) / CInt(rsstr)) * 100, "####0.00") & "%"
+                'objCommand.Dispose()
+
+                'strSQLQuery = strSELECT & " AND (zscj>=70 AND zscj<80)"
+                strSQLQuery = strSELECT & " AND (" & tjcj & ">=70 AND " & tjcj & "<80) and (" & tjcj & ">='0' AND " & tjcj & "<='999999')"
+                'objCommand = New OracleCommand(strSQLQuery, objConnection)
+                'rs = CStr(objCommand.ExecuteScalar())
+                rs = getstr(strSQLQuery)
+                xlSheet.Cells(9, 6) = rs & "人"
+                xlSheet.Cells(10, 6) = Format((CInt(rs) / CInt(rsstr)) * 100, "####0.00") & "%"
+                'objCommand.Dispose()
+
+                'strSQLQuery = strSELECT & " AND (zscj>=60 AND zscj<70)"
+                strSQLQuery = strSELECT & " AND (" & tjcj & ">=60 AND " & tjcj & "<70) and (" & tjcj & ">='0' AND " & tjcj & "<='999999')"
+                'objCommand = New OracleCommand(strSQLQuery, objConnection)
+                'rs = CStr(objCommand.ExecuteScalar())
+                rs = getstr(strSQLQuery)
+                xlSheet.Cells(9, 7) = rs & "人"
+                xlSheet.Cells(10, 7) = Format((CInt(rs) / CInt(rsstr)) * 100, "####0.00") & "%"
+                'objCommand.Dispose()
+
+                'strSQLQuery = strSELECT & " AND (zscj>=0 AND zscj<60)"
+                strSQLQuery = strSELECT & " AND (" & tjcj & ">=0 AND " & tjcj & "<60) and (" & tjcj & ">='0' AND " & tjcj & "<='999999')"
+                'objCommand = New OracleCommand(strSQLQuery, objConnection)
+                'rs = CStr(objCommand.ExecuteScalar())
+                rs = getstr(strSQLQuery)
+
+                xlSheet.Cells(9, 8) = rs & "人"
+                xlSheet.Cells(10, 8) = Format((CInt(rs) / CInt(rsstr)) * 100, "####0.00") & "%"
+                'objCommand.Dispose()
+                Dim str_avg As String
+                Try
+                    If Trim(bjdm) <> "" Then
+                        strSELECT = "SELECT sum(" & tjcj & ") FROM " & bmc_str & " a,xsjbxxb b, " & bjdm_table & " c WHERE a.xh=b.xh AND a.xkkh='" & xkkhstr & "' AND b." & bjdm_Column1 & "=c." & bjdm_Column2 & " AND c." & bjdm_Column3 & "='" & bjdm & "' and( " & tjcj & "<='99999' and " & tjcj & ">='0')"
+                    Else
+                        strSELECT = "SELECT sum(" & tjcj & ") FROM " & bmc_str & " a WHERE a.xkkh='" & xkkhstr & "' and( " & tjcj & "<='99999' and " & tjcj & ">='0')"
+                    End If
+                    'objCommand = New OracleCommand(strSELECT, objConnection)
+                    'rs = CStr(objCommand.ExecuteScalar())
+                    rs = getstr(strSELECT)
+                    If Trim(bjdm) <> "" Then
+                        strSELECT = "SELECT count(a.xh) FROM " & bmc_str & " a,xsjbxxb b, " & bjdm_table & " c WHERE a.xh=b.xh AND a.xkkh='" & xkkhstr & "' AND b." & bjdm_Column1 & "=c." & bjdm_Column2 & " AND c." & bjdm_Column3 & "='" & bjdm & "' and( " & tjcj & "<='99999' and " & tjcj & ">='0')"
+                    Else
+                        strSELECT = "SELECT count(a.xh) FROM " & bmc_str & " a WHERE a.xkkh='" & xkkhstr & "' and( " & tjcj & "<='99999' and " & tjcj & ">='0')"
+                    End If
+                    '========================================
+                    strSELECT = strSELECT & " and ((a.bz <> '缺考' and a.bz <> '缓考' and a.bz <> '免修' or a.bz is null))"
+                    '========================================
+                    'objCommand = New OracleCommand(strSELECT, objConnection)
+                    'rsstr = CStr(objCommand.ExecuteScalar())
+                    rs = getstr(strSELECT)
+                    str_avg = Format((CDbl(rs) / CInt(rsstr)), "####0.00")
+                    xlSheet.Cells(11, 4) = str_avg
+                    'objCommand.Dispose()
+                Catch ex As Exception
+                End Try
+                Try
+                    If Trim(bjdm) <> "" Then
+                        strSELECT = "SELECT to_char(sqrt(sum((to_number(" & tjcj & ")-to_number(" & str_avg & "))*(to_number(" & tjcj & ")-to_number(" & str_avg & ")))/to_number(" & rsstr & ")),'990.00') FROM " & bmc_str & " a,xsjbxxb b, " & bjdm_table & " c WHERE a.xh=b.xh AND a.xkkh='" & xkkhstr & "' AND b." & bjdm_Column1 & "=c." & bjdm_Column2 & " AND c." & bjdm_Column3 & "='" & bjdm & "' and( " & tjcj & "<='99999' and " & tjcj & ">='0')"
+                    Else
+                        strSELECT = "SELECT to_char(sqrt(sum((to_number(" & tjcj & ")-to_number(" & str_avg & "))*(to_number(" & tjcj & ")-to_number(" & str_avg & ")))/to_number(" & rsstr & ")),'990.00') FROM " & bmc_str & " a WHERE a.xkkh='" & xkkhstr & "' and( " & tjcj & "<='99999' and " & tjcj & ">='0')"
+                    End If
+                    xlSheet.Cells(11, 7) = getstr(strselect)
+                Catch ex As Exception
+                    Response.Write(strselect)
+                    Response.End()
+                End Try
+            End If
+        End If
+
+
+
+
+
+
+
+        '============(起始结束行：222-572-777)  针对试卷分析的================================================
+
+        '======开始成绩表的打印输出==（758-）=====================================================
+
+
+        If Request.QueryString("printType") = "4" Or Request.QueryString("printType") = "2" Or Request.QueryString("printType") = "1" Then
+            '成绩表
+            Dim str_dyqz As String = ""
+            Dim int_dyqz As Integer = 0
+            Dim str_qzbl As String = ""
+            If Kg_wsdyqz = "1" Then
+                str_dyqz = ",a.qzcj"
+                int_dyqz = 1
+                str_qzbl = "||'%；期中：'||qzcj"
+
+                xlSheet.Range(xlSheet.Cells(4, 1), xlSheet.Cells(4, 16)).Insert()
+                xlSheet.Cells(4, 1) = xkkh
+            End If
+
+            xlSheet.Cells(1, 1) = xxmc
+            xlSheet.Cells(2, 1) = kkxy
+            xlSheet.Cells(2, 4) = bjmc
+            '=====成绩表2时为 考核方式=======================
+            If Request.QueryString("printType") = "2" Then
+                xlSheet.Cells(2, 7 + int_dyqz) = khfs
+            End If
+            xlSheet.Cells(3, 1) = kcmc
+            If Request.QueryString("printType") = "2" Then
+                xlSheet.Cells(3, 4) = kcdm
+            End If
+            xlSheet.Cells(3, 7 + int_dyqz) = xf
+
+
+            Dim str_order As String = " order by b.zymc,a.xh"
+            Dim XS_BJMC As String
+            XS_BJMC = "0"
+            If Not Application("BJMC") Is Nothing Then
+                If CStr(Application("BJMC")) = "1" Then
+                    XS_BJMC = "1"
+                    str_order = " order by b.xzb,a.xh"
+                End If
+            End If
+            If getstr("select WsMd_Pxzd from xxmc") = "1" Then '网上选课名单、成绩录入名单的排序字段 的值为1时，按 xh
+                str_order = " order by a.xh"
+            End If
+            '=======一般情况下的成绩表信息生成=（学号、姓名、平时成绩、期中成绩（需要则有不需要时是“”）、期末成绩、实验成绩、成绩、标志、班级名称（或者专业名称）、行政班）==========
+            If Trim(bjdm) <> "" Then
+                strSQLQuery = "select a.xh,a.xm,a.pscj" & str_dyqz & ",a.qmcj,a.sycj,a.cj,a.bz,c." & bjdm_Column2 & ",B.XZB from " & bmc_str & " a,xsjbxxb b, " & bjdm_table & " c where a.xh=b.xh and a.xkkh='" & xkkhstr & "' and b." & bjdm_Column1 & "=c." & bjdm_Column2 & " and c." & bjdm_Column3 & "='" & bjdm & "'"
+            Else
+                strSQLQuery = "select a.xh,a.xm,a.pscj" & str_dyqz & ",a.qmcj,a.sycj,a.cj,a.bz,c.bjdm,B.XZB from " & bmc_str & " a,xsjbxxb b, bjdmb c where a.xh=b.xh and a.xkkh='" & xkkhstr & "' and b.xzb=c.bjmc "
+            End If
+
+            If Request.QueryString("printType") = "2" And str_xxmc = "中国矿业大学" Then
+                If Trim(bjdm) <> "" Then
+                    strSQLQuery = "select B.XZB,a.xh,a.xm,a.pscj" & str_dyqz & ",a.qmcj,a.sycj,a.cj,a.bz,c." & bjdm_Column2 & " from " & bmc_str & " a,xsjbxxb b, " & bjdm_table & " c where a.xh=b.xh and a.xkkh='" & xkkhstr & "' and b." & bjdm_Column1 & "=c." & bjdm_Column2 & " and c." & bjdm_Column3 & "='" & bjdm & "'"
+                Else
+                    strSQLQuery = "select B.XZB,a.xh,a.xm,a.pscj" & str_dyqz & ",a.qmcj,a.sycj,a.cj,a.bz,c.bjdm  from " & bmc_str & " a,xsjbxxb b, bjdmb c where a.xh=b.xh and a.xkkh='" & xkkhstr & "' and b.xzb=c.bjmc "
+                End If
+            End If
+            '===================
+            If (str_xxmc = "华南师范大学") Then
+                If Trim(bjdm) <> "" Then
+                    strSQLQuery = "select a.xh,a.xm,d.ps1,d.ps2,d.ps3,d.ps4,d.ps5,a.pscj" & str_dyqz & ",a.qmcj,a.sycj,a.cj,a.bz,c." & bjdm_Column2 & ",B.XZB from " & bmc_str & " a,xsjbxxb b, " & bjdm_table & " c,pscjb d where (a.xkkh = d.xkkh(+) and a.xh = d.xh(+)) and a.xh=b.xh and a.xkkh='" & xkkhstr & "' and b." & bjdm_Column1 & "=c." & bjdm_Column2 & " and c." & bjdm_Column3 & "='" & bjdm & "'"
+                Else
+                    strSQLQuery = "select a.xh,a.xm,d.ps1,d.ps2,d.ps3,d.ps4,d.ps5,a.pscj" & str_dyqz & ",a.qmcj,a.sycj,a.cj,a.bz,c.bjdm,B.XZB from " & bmc_str & " a,xsjbxxb b, bjdmb c,pscjb d where (a.xkkh = d.xkkh(+) and a.xh = d.xh(+)) and a.xh=b.xh and a.xkkh='" & xkkhstr & "' and b.xzb=c.bjmc "
+                End If
+            End If
+            '===================
+            strSQLQuery = strSQLQuery & str_order
+            'Response.Write(strSQLQuery)
+            'Response.End()
+            Try
+                objCommand = New OracleCommand(strSQLQuery, objConnection)
+                objDataReader = objCommand.ExecuteReader
+            Catch
+                Response.Write(strSQLQuery)
+                Exit Sub
+            End Try
+            i = 5 + int_dyqz
+            Dim bjdm2 As String    '用来记录是否更换了班级
+            bjdm2 = ""
+            Dim No As Integer = 1  '用来记录序列号
+            If (str_xxmc = "华南师范大学") Then
+                While objDataReader.Read()
+                    If bjdm2 <> CStr(objDataReader.Item(12 + int_dyqz)) And bjdm = "" Then   '当打印所有班级时，如果遇到班级不一样，则插入一行 班级名称  7
+                        bjdm2 = CStr(objDataReader.Item(12 + int_dyqz))
+
+                        xlSheet.Range(xlSheet.Cells(i, 1), xlSheet.Cells(i, 13 + int_dyqz)).Merge()  '合并单元格
+                        xlSheet.Range(xlSheet.Cells(i, 1), xlSheet.Cells(i, 13 + int_dyqz)).Borders.LineStyle = Excel.XlLineStyle.xlContinuous  '设置线条样式
+                        xlSheet.Cells(i, 1) = GetBjmc(bjdm2, objConnection, 2)    '向单元格输入信息
+
+                        i = i + 1
+                        xlSheet.Range(xlSheet.Cells(i, 1), xlSheet.Cells(i, 16)).Insert()
+                    End If
+                    xlSheet.Cells(i, 1) = "'" & CStr(No)
+                    For j = 1 To 12 + int_dyqz     '7==========
+                        If Not IsDBNull(objDataReader.Item(j - 1)) Then
+                            xlSheet.Cells(i, j + 1) = "'" & CStr(objDataReader.Item(j - 1))
+                        End If
+                        xlSheet.Range(xlSheet.Cells(i, 1), xlSheet.Cells(i, 13 + int_dyqz)).Borders.LineStyle = 1
+                    Next
+
+                    i = i + 1
+                    No = No + 1
+                    xlSheet.Range(xlSheet.Cells(i, 1), xlSheet.Cells(i, 16)).Insert()
+                End While
+            ElseIf str_xxmc = "西华大学" Then    ''西华大学
+
+                While objDataReader.Read()
+                    If bjdm2 <> CStr(objDataReader.Item(7 + int_dyqz)) And bjdm = "" Then   '当打印所有班级时，如果遇到班级不一样，则不需要插入一行 班级名称  7
+                        bjdm2 = CStr(objDataReader.Item(7 + int_dyqz))
+                    End If
+                    xlSheet.Cells(i, 1) = "'" & CStr(No)
+                    For j = 1 To 7 + int_dyqz     '7==========
+                        If Not IsDBNull(objDataReader.Item(j - 1)) Then
+                            xlSheet.Cells(i, j + 1) = "'" & CStr(objDataReader.Item(j - 1))
+                        End If
+                        xlSheet.Range(xlSheet.Cells(i, 1), xlSheet.Cells(i, 8 + int_dyqz)).Borders.LineStyle = 1
+                    Next
+
+                    i = i + 1
+                    No = No + 1
+                    xlSheet.Range(xlSheet.Cells(i, 1), xlSheet.Cells(i, 16)).Insert()
+                End While
+            ElseIf (str_xxmc = "中国矿业大学") And Request.QueryString("printType") = "2" Then
+
+                While objDataReader.Read()
+                    'If bjdm2 <> CStr(objDataReader.Item(7 + int_dyqz)) And bjdm = "" Then   '当打印所有班级时，如果遇到班级不一样，则插入一行 班级名称  7
+                    '    bjdm2 = CStr(objDataReader.Item(7 + int_dyqz))
+
+                    '    xlSheet.Range(xlSheet.Cells(i, 1), xlSheet.Cells(i, 2)).Merge()  '合并单元格
+                    '    xlSheet.Range(xlSheet.Cells(i, 1), xlSheet.Cells(i, 2)).Borders.LineStyle = Excel.XlLineStyle.xlContinuous  '设置线条样式
+                    '    xlSheet.Cells(i, 1) = GetBjmc(bjdm2, objConnection, 2)    '向单元格输入信息
+                    '    i = i + 1
+                    '    xlSheet.Range(xlSheet.Cells(i, 1), xlSheet.Cells(i, 16)).Insert()
+                    'End If
+
+                    xlSheet.Cells(i, 1) = "'" & CStr(No)
+
+                    If Not IsDBNull(objDataReader.Item(0)) Then
+                        xlSheet.Cells(i, 2) = "'" & getbjjc(CStr(objDataReader.Item(0)))
+                    Else
+                        xlSheet.Cells(i, 2) = "'" & CStr(objDataReader.Item(0))
+                    End If
+
+                    For j = 2 To 8 + int_dyqz     '7==========
+                        If Not IsDBNull(objDataReader.Item(j - 1)) Then
+                            xlSheet.Cells(i, j + 1) = "'" & CStr(objDataReader.Item(j - 1))
+                        End If
+                        'xlSheet.Range(xlSheet.Cells(i, 1), xlSheet.Cells(i, 8 + int_dyqz)).Borders.LineStyle = 1
+                    Next
+                    xlSheet.Range(xlSheet.Cells(i, 1), xlSheet.Cells(i, 9 + int_dyqz)).Borders.LineStyle = 1
+                    i = i + 1
+                    No = No + 1
+                    xlSheet.Range(xlSheet.Cells(i, 1), xlSheet.Cells(i, 17)).Insert()
+                End While
+
+
+            Else
+
+                While objDataReader.Read()
+                    If bjdm2 <> CStr(objDataReader.Item(7 + int_dyqz)) And bjdm = "" Then   '当打印所有班级时，如果遇到班级不一样，则插入一行 班级名称  7
+                        bjdm2 = CStr(objDataReader.Item(7 + int_dyqz))
+
+                        xlSheet.Range(xlSheet.Cells(i, 1), xlSheet.Cells(i, 8 + int_dyqz)).Merge()  '合并单元格
+                        xlSheet.Range(xlSheet.Cells(i, 1), xlSheet.Cells(i, 8 + int_dyqz)).Borders.LineStyle = Excel.XlLineStyle.xlContinuous  '设置线条样式
+                        xlSheet.Cells(i, 1) = GetBjmc(bjdm2, objConnection, 2)    '向单元格输入信息
+                        i = i + 1
+                        xlSheet.Range(xlSheet.Cells(i, 1), xlSheet.Cells(i, 16)).Insert()
+                    End If
+
+                    xlSheet.Cells(i, 1) = "'" & CStr(No)
+                    For j = 1 To 7 + int_dyqz     '7==========
+                        If Not IsDBNull(objDataReader.Item(j - 1)) Then
+                            xlSheet.Cells(i, j + 1) = "'" & CStr(objDataReader.Item(j - 1))
+                        End If
+                        xlSheet.Range(xlSheet.Cells(i, 1), xlSheet.Cells(i, 8 + int_dyqz)).Borders.LineStyle = 1
+                    Next
+
+                    i = i + 1
+                    No = No + 1
+                    xlSheet.Range(xlSheet.Cells(i, 1), xlSheet.Cells(i, 16)).Insert()
+                End While
+
+
+            End If
+
+            objCommand.Dispose()
+            objDataReader.Dispose()
+
+            'ActiveWindow.SelectedSheets.HPageBreaks.Add(Before:=ActiveCell)
+            '  xlSheet.HPageBreaks.Add(xlSheet.Rows(i))
+            v_rs = No - 1    '总人数
+
+            '==============================================================================================================================
+            '华南师范与其他学校 Excel 的不同 设置位置标量  相差 5 个平时成绩
+            Dim POSITION As Integer
+            If (str_xxmc = "华南师范大学") Then
+                POSITION = 11
+            Else
+                POSITION = 6
+            End If
+
+            '==============================================================================================================================
+
+
+            '========实考人数=========================
+            If Trim(bjdm) <> "" Then
+                strSQLQuery = "SELECT COUNT(a.xh) FROM " & bmc_str & " a,xsjbxxb b, " & bjdm_table & " c WHERE a.xh=b.xh AND a.xkkh='" & xkkhstr & "' AND b." & bjdm_Column1 & "=c." & bjdm_Column2 & " AND c." & bjdm_Column3 & "='" & bjdm & "'"
+            Else
+                strSQLQuery = "SELECT COUNT(a.xh) FROM " & bmc_str & " a WHERE a.xkkh='" & xkkhstr & "' "
+            End If
+            strSQLQuery = strSQLQuery & " and (a.bz = '缺考' or a.bz = '缓考' or a.bz = '免修')"
+            'objCommand = New OracleCommand(strSQLQuery, objConnection)
+            'Dim sk_rs As Integer = v_rs - objCommand.ExecuteScalar()         '实考人数
+            Dim sk_rs As Integer = v_rs - getstr(strSQLQuery)
+
+            'objCommand.Dispose()
+            '=========================================
+
+
+
+            i = i - 1    '单元格位置
+            If jfz_str = "1" Then    '五级
+
+                If Trim(bjdm) <> "" Then
+                    If tjcj = "qmcj" Then
+                        'strSQLQuery = "SELECT a.qmcj, COUNT(a.xh), ROUND(COUNT(a.xh)/" & CStr(v_rs) & ",4)*100 FROM " & bmc_str & " a,xsjbxxb b, " & bjdm_table & " c WHERE a.xh=b.xh AND a.xkkh='" & xkkhstr & "' AND b." & bjdm_Column1 & "=c." & bjdm_Column2 & " AND c." & bjdm_Column3 & "='" & bjdm & "'  GROUP BY a.qmcj"
+
+                        strSQLQuery = "SELECT a.qmcj, COUNT(a.xh), ROUND(COUNT(a.xh)/" & CStr(sk_rs) & ",4)*100 FROM " & bmc_str & " a,xsjbxxb b, " & bjdm_table & " c WHERE a.xh=b.xh AND a.xkkh='" & xkkhstr & "' AND b." & bjdm_Column1 & "=c." & bjdm_Column2 & " AND c." & bjdm_Column3 & "='" & bjdm & "' and ((a.bz <> '缺考' and a.bz <> '缓考' and a.bz <> '免修' or a.bz is null) ) GROUP BY a.qmcj"
+
+                    Else
+                        'strSQLQuery = "SELECT a.cj, COUNT(a.xh), ROUND(COUNT(a.xh)/" & CStr(v_rs) & ",4)*100 FROM " & bmc_str & " a,xsjbxxb b, " & bjdm_table & " c WHERE a.xh=b.xh AND a.xkkh='" & xkkhstr & "' AND b." & bjdm_Column1 & "=c." & bjdm_Column2 & " AND c." & bjdm_Column3 & "='" & bjdm & "'  GROUP BY a.cj"
+
+                        strSQLQuery = "SELECT a.cj, COUNT(a.xh), ROUND(COUNT(a.xh)/" & CStr(sk_rs) & ",4)*100 FROM " & bmc_str & " a,xsjbxxb b, " & bjdm_table & " c WHERE a.xh=b.xh AND a.xkkh='" & xkkhstr & "' AND b." & bjdm_Column1 & "=c." & bjdm_Column2 & " AND c." & bjdm_Column3 & "='" & bjdm & "'  and ((a.bz <> '缺考' and a.bz <> '缓考' and a.bz <> '免修' or a.bz is null) )  GROUP BY a.cj"
+
+                    End If
+                Else
+                    If tjcj = "qmcj" Then
+                        'strSQLQuery = "select qmcj,count(xh),round(count(xh)/" & CStr(v_rs) & ",4)*100 from " & bmc_str & " where xkkh='" & xkkhstr & "' group by qmcj"
+
+                        strSQLQuery = "select qmcj,count(xh),round(count(xh)/" & CStr(sk_rs) & ",4)*100 from " & bmc_str & " where xkkh='" & xkkhstr & "' and ((bz <> '缺考' and bz <> '缓考' and bz <> '免修' or bz is null) ) group by qmcj"
+
+                    Else
+                        'strSQLQuery = "select cj,count(xh),round(count(xh)/" & CStr(v_rs) & ",4)*100 from " & bmc_str & " where xkkh='" & xkkhstr & "' group by cj"
+
+                        strSQLQuery = "select cj,count(xh),round(count(xh)/" & CStr(sk_rs) & ",4)*100 from " & bmc_str & " where xkkh='" & xkkhstr & "'  and ((bz <> '缺考' and bz <> '缓考' and bz <> '免修' or bz is null) ) group by cj"
+
+                    End If
+                End If
+
+                objCommand = New OracleCommand(strSQLQuery, objConnection)
+                objDataReader = objCommand.ExecuteReader
+
+
+                Dim k As Integer    ' 用来“其他”栏目的人数
+                k = 0
+                While objDataReader.Read()
+                    If Not IsDBNull(objDataReader.Item(0)) Then
+                        If CStr(objDataReader.Item(0)) = "优秀" Then
+                            xlSheet.Cells(i + 3, 4) = CStr(objDataReader.Item(1)) & "人"
+                            xlSheet.Cells(i + 3, POSITION + int_dyqz) = CStr(objDataReader.Item(2)) & "%"
+                        ElseIf CStr(objDataReader.Item(0)) = "良好" Then
+                            xlSheet.Cells(i + 4, 4) = CStr(objDataReader.Item(1)) & "人"
+                            xlSheet.Cells(i + 4, POSITION + int_dyqz) = CStr(objDataReader.Item(2)) & "%"
+                        ElseIf CStr(objDataReader.Item(0)) = "中等" Then
+                            xlSheet.Cells(i + 5, 4) = CStr(objDataReader.Item(1)) & "人"
+                            xlSheet.Cells(i + 5, POSITION + int_dyqz) = CStr(objDataReader.Item(2)) & "%"
+                        ElseIf CStr(objDataReader.Item(0)) = "及格" Then
+                            xlSheet.Cells(i + 6, 4) = CStr(objDataReader.Item(1)) & "人"
+                            xlSheet.Cells(i + 6, POSITION + int_dyqz) = CStr(objDataReader.Item(2)) & "%"
+                        ElseIf CStr(objDataReader.Item(0)) = "不及格" Then
+                            xlSheet.Cells(i + 7, 4) = CStr(objDataReader.Item(1)) & "人"
+                            xlSheet.Cells(i + 7, POSITION + int_dyqz) = CStr(objDataReader.Item(2)) & "%"
+                        Else
+                            'k = k + 1
+                            k = k + CStr(objDataReader.Item(1))
+                        End If
+                    End If
+                End While
+
+                xlSheet.Cells(i + 8, 4) = CStr(k) & "人"
+                xlSheet.Cells(i + 8, POSITION + int_dyqz) = Format((k / v_rs) * 100, "####0.00") & "%"
+                objCommand.Dispose()
+                objDataReader.Dispose()
+            ElseIf jfz_str = "2" Then    '二级
+                If Trim(bjdm) <> "" Then
+                    If tjcj = "qmcj" Then
+                        'strSQLQuery = "SELECT a.qmcj, COUNT(a.xh), ROUND(COUNT(a.xh)/" & CStr(v_rs) & ",4)*100 FROM " & bmc_str & " a,xsjbxxb b, " & bjdm_table & " c WHERE a.xh=b.xh AND a.xkkh='" & xkkhstr & "' AND b." & bjdm_Column1 & "=c." & bjdm_Column2 & " AND c." & bjdm_Column3 & "='" & bjdm & "'  GROUP BY a.qmcj"
+
+                        strSQLQuery = "SELECT a.qmcj, COUNT(a.xh), ROUND(COUNT(a.xh)/" & CStr(sk_rs) & ",4)*100 FROM " & bmc_str & " a,xsjbxxb b, " & bjdm_table & " c WHERE a.xh=b.xh AND a.xkkh='" & xkkhstr & "' AND b." & bjdm_Column1 & "=c." & bjdm_Column2 & " AND c." & bjdm_Column3 & "='" & bjdm & "' and ((a.bz <> '缺考' and a.bz <> '缓考' and a.bz <> '免修' or a.bz is null) ) GROUP BY a.qmcj"
+
+                    Else
+                        'strSQLQuery = "SELECT a.cj, COUNT(a.xh), ROUND(COUNT(a.xh)/" & CStr(v_rs) & ",4)*100 FROM " & bmc_str & " a,xsjbxxb b, " & bjdm_table & " c WHERE a.xh=b.xh AND a.xkkh='" & xkkhstr & "' AND b." & bjdm_Column1 & "=c." & bjdm_Column2 & " AND c." & bjdm_Column3 & "='" & bjdm & "'  GROUP BY a.cj"
+
+                        strSQLQuery = "SELECT a.cj, COUNT(a.xh), ROUND(COUNT(a.xh)/" & CStr(sk_rs) & ",4)*100 FROM " & bmc_str & " a,xsjbxxb b, " & bjdm_table & " c WHERE a.xh=b.xh AND a.xkkh='" & xkkhstr & "' AND b." & bjdm_Column1 & "=c." & bjdm_Column2 & " AND c." & bjdm_Column3 & "='" & bjdm & "' and ((a.bz <> '缺考' and a.bz <> '缓考' and a.bz <> '免修' or a.bz is null) ) GROUP BY a.cj"
+
+                    End If
+                Else
+                    If tjcj = "qmcj" Then
+                        'strSQLQuery = "select qmcj,count(xh),round(count(xh)/" & CStr(v_rs) & ",4)*100 from " & bmc_str & " where xkkh='" & xkkhstr & "'   group by qmcj"
+
+                        strSQLQuery = "select qmcj,count(xh),round(count(xh)/" & CStr(sk_rs) & ",4)*100 from " & bmc_str & " where xkkh='" & xkkhstr & "'  and ((bz <> '缺考' and bz <> '缓考' and bz <> '免修' or bz is null) ) group by qmcj"
+
+                    Else
+                        'strSQLQuery = "select cj,count(xh),round(count(xh)/" & CStr(v_rs) & ",4)*100 from " & bmc_str & " where xkkh='" & xkkhstr & "'   group by cj"
+
+                        strSQLQuery = "select cj,count(xh),round(count(xh)/" & CStr(sk_rs) & ",4)*100 from " & bmc_str & " where xkkh='" & xkkhstr & "' and ((bz <> '缺考' and bz <> '缓考' and bz <> '免修' or bz is null) )  group by cj"
+
+                    End If
+                End If
+
+                objCommand = New OracleCommand(strSQLQuery, objConnection)
+                objDataReader = objCommand.ExecuteReader
+
+
+                Dim k As Integer    ' 用来“其他”栏目的人数
+                k = 0
+                xlSheet.Cells(i + 3, 4) = "合格 0人"
+                xlSheet.Cells(i + 3, POSITION + int_dyqz) = "0%"
+                xlSheet.Cells(i + 4, 4) = "不合格 0人"
+                xlSheet.Cells(i + 4, POSITION + int_dyqz) = "0%"
+
+                While objDataReader.Read()
+                    If Not IsDBNull(objDataReader.Item(0)) Then
+                        If CStr(objDataReader.Item(0)) = "合格" Then
+                            xlSheet.Cells(i + 3, 4) = "合格" & CStr(objDataReader.Item(1)) & "人"
+                            xlSheet.Cells(i + 3, POSITION + int_dyqz) = CStr(objDataReader.Item(2)) & "%"
+                        ElseIf CStr(objDataReader.Item(0)) = "不合格" Then
+                            xlSheet.Cells(i + 4, 4) = "不合格" & CStr(objDataReader.Item(1)) & "人"
+                            xlSheet.Cells(i + 4, POSITION + int_dyqz) = CStr(objDataReader.Item(2)) & "%"
+                        Else
+                            k = k + CInt(objDataReader.Item(1))
+                        End If
+                    End If
+                End While
+
+                xlSheet.Cells(i + 5, 4) = "其他" & CStr(k) & "人"
+                xlSheet.Cells(i + 5, POSITION + int_dyqz) = Format((k / v_rs) * 100, "####0.00") & "%"
+
+                objCommand.Dispose()
+                objDataReader.Dispose()
+            Else
+                Dim strSELECT As String
+                If Trim(bjdm) <> "" Then
+                    strSELECT = "SELECT /*+ rule */ COUNT(a.xh) FROM " & bmc_str & " a,xsjbxxb b, " & bjdm_table & " c WHERE a.xh=b.xh AND a.xkkh='" & xkkhstr & "' AND b." & bjdm_Column1 & "=c." & bjdm_Column2 & " AND c." & bjdm_Column3 & "='" & bjdm & "'"
+                Else
+                    strSELECT = "SELECT /*+ rule */ COUNT(a.xh) FROM " & bmc_str & " a WHERE a.xkkh='" & xkkhstr & "' "
+                End If
+
+                '====================================================
+                strSELECT = strSELECT & " and ((a.bz <> '缺考' and a.bz <> '缓考' and a.bz <> '免修' or a.bz is null) )"
+                '====================================================
+
+                'strSQLQuery = strSELECT & " AND a.zscj>=90 "
+                strSQLQuery = strSELECT & " AND (" & tjcj & ">=90 AND " & tjcj & "<=100)  and (" & tjcj & ">='0' AND " & tjcj & "<='999999')"
+                'objCommand = New OracleCommand(strSQLQuery, objConnection)
+                'rs = CStr(objCommand.ExecuteScalar())
+                rs = getstr(strSQLQuery)
+                xlSheet.Cells(i + 3, 4) = rs & "人"
+                xlSheet.Cells(i + 3, POSITION + int_dyqz) = Format((CInt(rs) / sk_rs) * 100, "####0.00") & "%"
+                'objCommand.Dispose()
+
+                'strSQLQuery = strSELECT & " AND (zscj>=80 AND zscj<90)"
+                strSQLQuery = strSELECT & " AND (" & tjcj & ">=80 AND " & tjcj & "<90) and (" & tjcj & ">='0' AND " & tjcj & "<='999999')"
+                'objCommand = New OracleCommand(strSQLQuery, objConnection)
+                'rs = CStr(objCommand.ExecuteScalar())
+                rs = getstr(strSQLQuery)
+
+                xlSheet.Cells(i + 4, 4) = rs & "人"
+                xlSheet.Cells(i + 4, POSITION + int_dyqz) = Format((CInt(rs) / sk_rs) * 100, "####0.00") & "%"
+                'objCommand.Dispose()
+
+                'strSQLQuery = strSELECT & " AND (zscj>=70 AND zscj<80)"
+                strSQLQuery = strSELECT & " AND (" & tjcj & ">=70 AND " & tjcj & "<80) and (" & tjcj & ">='0' AND " & tjcj & "<='999999')"
+                'objCommand = New OracleCommand(strSQLQuery, objConnection)
+                'rs = CStr(objCommand.ExecuteScalar())
+                rs = getstr(strSQLQuery)
+
+                xlSheet.Cells(i + 5, 4) = rs & "人"
+                xlSheet.Cells(i + 5, POSITION + int_dyqz) = Format((CInt(rs) / sk_rs) * 100, "####0.00") & "%"
+                'objCommand.Dispose()
+
+                'strSQLQuery = strSELECT & " AND (zscj>=60 AND zscj<70)"
+                strSQLQuery = strSELECT & " AND (" & tjcj & ">=60 AND " & tjcj & "<70) and (" & tjcj & ">='0' AND " & tjcj & "<='999999')"
+                'objCommand = New OracleCommand(strSQLQuery, objConnection)
+                'rs = CStr(objCommand.ExecuteScalar())
+                rs = getstr(strSQLQuery)
+
+                xlSheet.Cells(i + 6, 4) = rs & "人"
+                xlSheet.Cells(i + 6, POSITION + int_dyqz) = Format((CInt(rs) / sk_rs) * 100, "####0.00") & "%"
+                'objCommand.Dispose()
+
+                'strSQLQuery = strSELECT & " AND (zscj>=0 AND zscj<60)"     ' 免修，缺考，总评填 0 ，不算不及格人数   and (a.bz <> '免修' or a.bz is null) and (a.bz <> '缺考' or a.bz is null)
+                strSQLQuery = strSELECT & " AND (" & tjcj & ">=0 AND " & tjcj & "<60) and (" & tjcj & ">='0' AND " & tjcj & "<='999999') "
+                'objCommand = New OracleCommand(strSQLQuery, objConnection)
+                'rs = CStr(objCommand.ExecuteScalar())
+                rs = getstr(strSQLQuery)
+                xlSheet.Cells(i + 7, 4) = rs & "人"
+                xlSheet.Cells(i + 7, POSITION + int_dyqz) = Format((CInt(rs) / sk_rs) * 100, "####0.00") & "%"
+                'objCommand.Dispose()
+
+                '如果是百分制的，成绩栏目一定为数字，则无‘其他’栏的人
+                xlSheet.Cells(i + 8, 4) = "0人"
+                xlSheet.Cells(i + 8, POSITION + int_dyqz) = "0 %"
+            End If
+
+            xlSheet.Cells(i + 9, 4) = CInt(v_rs) & "人"
+            xlSheet.Cells(i + 9, POSITION + int_dyqz) = "100.00%"
+
+            Dim objCommandqk As OracleCommand   '缺考统计
+            Dim strSql As String
+
+            'Dim objCommand As OracleCommand
+            If bjdm <> "" Then
+                strSQLQuery = "SELECT COUNT(a.xh) FROM " & bmc_str & " a,xsjbxxb b, " & bjdm_table & " c WHERE a.xh=b.xh AND a.xkkh='" & xkkhstr & "' AND b." & bjdm_Column1 & "=c." & bjdm_Column2 & " AND c." & bjdm_Column3 & "='" & bjdm & "' AND a.bz='缓考'"
+                'objCommand = New OracleCommand(strSQLQuery, objConnection)
+
+                '=======缺考统计=======
+                strSql = "SELECT COUNT(a.xh) FROM " & bmc_str & " a,xsjbxxb b, " & bjdm_table & " c WHERE a.xh=b.xh AND a.xkkh='" & xkkhstr & "' AND b." & bjdm_Column1 & "=c." & bjdm_Column2 & " AND c." & bjdm_Column3 & "='" & bjdm & "' AND a.bz='缺考'"
+                objCommandqk = New OracleCommand(strSql, objConnection)
+                '======================
+                'xlSheet.Cells(i + 10, 1) = "缓考" & CStr(objCommand.ExecuteScalar()) & "人" & "    缺考" & CStr(objCommandqk.ExecuteScalar()) & "人"
+                xlSheet.Cells(i + 10, 1) = "缓考" & getstr(strSql) & "人" & "    缺考" & CStr(objCommandqk.ExecuteScalar()) & "人"
+
+                strSQLQuery = "SELECT COUNT(a.xh) FROM " & bmc_str & " a,xsjbxxb b, " & bjdm_table & " c WHERE a.xh=b.xh AND a.xkkh='" & xkkhstr & "' AND b." & bjdm_Column1 & "=c." & bjdm_Column2 & " AND c." & bjdm_Column3 & "='" & bjdm & "' AND a.bz='免修'"
+                'objCommand = New OracleCommand(strSQLQuery, objConnection)
+                xlSheet.Cells(i + 10, 4) = "免修" & getstr(strSQLQuery) & "人"
+
+                '实考人数 = 总数 - 免修 - 缺考     
+                'xlSheet.Cells(i + 10, 6 + int_dyqz) = "实考" & CStr(v_rs - objCommand.ExecuteScalar() - objCommandqk.ExecuteScalar()) & "人"
+                xlSheet.Cells(i + 10, POSITION + int_dyqz) = "实考" & CStr(sk_rs) & "人"
+            Else
+                strSQLQuery = "select count(xh) from " & bmc_str & " where xkkh='" & xkkhstr & "' and bz='缓考'"
+                'objCommand = New OracleCommand(strSQLQuery, objConnection)
+
+                '=======缺考统计=======
+                strSql = "select count(xh) from " & bmc_str & " where xkkh='" & xkkhstr & "' and bz='缺考'"
+                objCommandqk = New OracleCommand(strSql, objConnection)
+                '======================
+                xlSheet.Cells(i + 10, 1) = "缓考" & getstr(strSql) & "人" & "    缺考" & CStr(objCommandqk.ExecuteScalar()) & "人"
+
+
+                strSQLQuery = "select count(xh) from " & bmc_str & " where xkkh='" & xkkhstr & "' and bz='免修'"
+                'objCommand = New OracleCommand(strSQLQuery, objConnection)
+                xlSheet.Cells(i + 10, 4) = "免修" & getstr(strSQLQuery) & "人"
+
+                '实考人数 = 总数 - 免修 - 缺考   
+                ' xlSheet.Cells(i + 10, 6 + int_dyqz) = "实考" & CStr(v_rs - objCommand.ExecuteScalar() - objCommandqk.ExecuteScalar()) & "人"
+                xlSheet.Cells(i + 10, POSITION + int_dyqz) = "实考" & CStr(sk_rs) & "人"
+            End If
+            Dim str_tab As String = getstr("select tab from jxrwbview where xkkh='" & xkkhstr & "'")
+            Dim str_sql As String = "select '平时：'||pscj" & str_qzbl & "||'%；期末：'||qmcj||'%；实验：'||sycj||'%' from " & str_tab & " where xkkh='" & xkkhstr & "'"
+            Dim str_cjbl As String = getstr(str_sql)
+            xlSheet.Cells(i + 11, 1) = str_cjbl
+        End If
+        xlApp.Visible = False
+        objConnection.Dispose()
+        xlBook.Save()
+
+
+
+        ' sjf(如果需要直接打印成绩则)
+        Dim zjdy As String
+        zjdy = getstr("select cjzjdy from xxmc where cjzjdy||'z'='1z' ")
+        If zjdy = "1" Then
+            Dim filename2 As String
+            xkkhstr = xkkhstr + "doc"
+            filename2 = "excel/" & xkkhstr & ".html"
+            If File.Exists(Server.MapPath(filename2)) Then
+                File.Delete(Server.MapPath(filename2))
+            End If
+            xlBook.SaveAs(Server.MapPath(filename2), Excel.XlFileFormat.xlHtml, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Excel.XlSaveAsAccessMode.xlNoChange, Type.Missing, Type.Missing, Type.Missing, Type.Missing)
+            xlBook.Close(True, Server.MapPath(filename), True)
+            ' xlApp.Quit()
+            xlBook = Nothing
+            xlApp = Nothing
+            xlSheet = Nothing
+            Response.Redirect(filename2)
+            'Response.Write("<script>window.open('RedirectToExcel.aspx?ExcelName=excel/filename2','输出成绩单','toolbar=0,location=0,directories=0,status=0,menubar=1,scrollbars=1,resizable=0,width=300,height=100,left=0,top=0')</script>")
+        Else
+            xlBook.Close(True, Server.MapPath(filename), True)
+            ' xlApp.Quit()
+            xlBook = Nothing
+            xlApp = Nothing
+            xlSheet = Nothing
+            Response.Redirect(filename)
+            'Response.Write("<script>window.open('RedirectToExcel.aspx?ExcelName=excel/filename','输出成绩单','toolbar=0,location=0,directories=0,status=0,menubar=1,scrollbars=1,resizable=0,width=300,height=100,left=0,top=0')</script>")
+        End If
+        'xlBook.Close(True, Server.MapPath(filename), True)
+        '' xlApp.Quit()
+        'xlBook = Nothing
+        'xlApp = Nothing
+        'xlSheet = Nothing
+        'Response.Redirect(filename)
+    End Sub
+
+    Function GetBjmc(ByVal bjdm As String, ByVal objConnection As OracleConnection, ByVal Type As String) As String
+        '返回班级名称或学院名称
+        Dim strSQL, String1 As String
+        If Type = "3" Then
+            'String1 = "学院："
+            'strSQL = "SELECT XYMC FROM XYDMB WHERE XYDM='" & bjdm & "'"
+            Return ""
+        Else
+            String1 = "行政班："
+            If str_xxmc = "中国矿业大学" Then
+                strSQL = "SELECT BJJC FROM BJDMB WHERE BJDM='" & bjdm & "'"
+            Else
+                strSQL = "SELECT BJMC FROM BJDMB WHERE BJDM='" & bjdm & "'"
+            End If
+        End If
+        Dim objCommand As New OracleCommand(strSQL, objConnection)
+
+        If Not IsDBNull(objCommand.ExecuteScalar()) Then
+            Return String1 & CStr(objCommand.ExecuteScalar())
+        Else
+            Return String1
+        End If
+    End Function
+    Function getbjjc(ByVal bjmc As String) As String
+        Dim strsql As String = "select bjjc from bjdmb where bjmc='" & bjmc & "'"
+        Dim bjjc As String = getstr(strsql)
+        Return bjjc
+    End Function
+
+
+End Class

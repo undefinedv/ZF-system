@@ -1,0 +1,14 @@
+/* Default CSS Stylesheet for a new Web Application project */
+
+A:link {
+	COLOR: #0000ff; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #0000ff; TEXT-DECORATION: none
+}
+A:active {
+	COLOR: #990000; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #006633; TEXT-DECORATION: underline
+}

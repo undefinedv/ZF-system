@@ -1,0 +1,182 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=GB2312">
+<meta name=ProgId content=Excel.Sheet>
+<meta name=Generator content="Microsoft Excel 9">
+<link rel=File-List href="./222.files/filelist.xml">
+<link rel=Edit-Time-Data href="./222.files/editdata.mso">
+<link rel=OLE-Object-Data href="./222.files/oledata.mso">
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>xky</o:Author>
+  <o:LastAuthor>xky</o:LastAuthor>
+  <o:Created>2002-05-27T17:51:00Z</o:Created>
+  <o:LastSaved>2002-06-22T10:03:03Z</o:LastSaved>
+  <o:Company>zydn</o:Company>
+  <o:Version>9.2812</o:Version>
+ </o:DocumentProperties>
+ <o:OfficeDocumentSettings>
+  <o:DownloadComponents/>
+  <o:LocationOfComponents HRef="file:///E:/msowc.cab"/>
+ </o:OfficeDocumentSettings>
+</xml><![endif]-->
+<style>
+<!--table
+ {mso-displayed-decimal-separator:"\.";
+ mso-displayed-thousand-separator:"\,";}
+@page
+ {margin:1.0in .75in 1.0in .75in;
+ mso-header-margin:.5in;
+ mso-footer-margin:.5in;}
+tr
+ {mso-height-source:auto;
+ mso-ruby-visibility:none;}
+col
+ {mso-width-source:auto;
+ mso-ruby-visibility:none;}
+br
+ {mso-data-placement:same-cell;}
+.style0
+ {mso-number-format:General;
+ text-align:general;
+ vertical-align:bottom;
+ white-space:nowrap;
+ mso-rotate:0;
+ mso-background-source:auto;
+ mso-pattern:auto;
+ color:windowtext;
+ font-size:9.0pt;
+ font-weight:400;
+ font-style:normal;
+ text-decoration:none;
+ font-family:宋体;
+ mso-generic-font-family:auto;
+ mso-font-charset:134;
+ border:none;
+ mso-protection:locked visible;
+ mso-style-name:常规;
+ mso-style-id:0;}
+td
+ {mso-style-parent:style0;
+ padding-top:1px;
+ padding-right:1px;
+ padding-left:1px;
+ mso-ignore:padding;
+ color:windowtext;
+ font-size:9.0pt;
+ font-weight:400;
+ font-style:normal;
+ text-decoration:none;
+ font-family:宋体;
+ mso-generic-font-family:auto;
+ mso-font-charset:134;
+ mso-number-format:General;
+ text-align:general;
+ vertical-align:bottom;
+ border:none;
+ mso-background-source:auto;
+ mso-pattern:auto;
+ mso-protection:locked visible;
+ white-space:nowrap;
+ mso-rotate:0;}
+.xl23
+ {font-size:10.0pt;}
+.xl24
+ {mso-style-parent:style0;
+ text-align:left;
+ font-size:10.0pt;
+ border:.5pt solid windowtext;}
+.xl25
+ {mso-style-parent:style0;
+ mso-number-format:"Long Date";
+ text-align:left;
+ font-size:10.0pt;
+ border:.5pt solid windowtext;}
+.xl26
+ {text-align:center;
+ font-style:bold;
+ font-size:15.0pt;}
+.xl27
+ {text-align:center;
+ font-size:12.0pt;}
+.xl28
+ {mso-style-parent:style0;
+ text-align:center;
+ font-size:10.0pt;
+ border:.5pt solid windowtext;}
+.xl29
+ {mso-style-parent:style0;
+ text-align:center;
+ vertical-align:middle;
+ font-size:10.0pt;
+ border:.5pt solid windowtext;}
+ruby
+ {ruby-align:left;}
+rt
+ {color:windowtext;
+ font-size:9.0pt;
+ font-weight:400;
+ font-style:normal;
+ text-decoration:none;
+ font-family:宋体;
+ mso-generic-font-family:auto;
+ mso-font-charset:134;
+ mso-char-type:none;
+ display:none;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <x:ExcelWorkbook>
+  <x:ExcelWorksheets>
+   <x:ExcelWorksheet>
+    <x:Name>Sheet1</x:Name>
+    <x:WorksheetOptions>
+     <x:DefaultRowHeight>225</x:DefaultRowHeight>
+     <x:Print>
+      <x:ValidPrinterInfo/>
+      <x:PaperSizeIndex>9</x:PaperSizeIndex>
+      <x:HorizontalResolution>-3</x:HorizontalResolution>
+      <x:VerticalResolution>0</x:VerticalResolution>
+     </x:Print>
+     <x:Selected/>
+     <x:Panes>
+      <x:Pane>
+       <x:Number>3</x:Number>
+       <x:ActiveRow>24</x:ActiveRow>
+       <x:ActiveCol>5</x:ActiveCol>
+      </x:Pane>
+     </x:Panes>
+     <x:ProtectContents>False</x:ProtectContents>
+     <x:ProtectObjects>False</x:ProtectObjects>
+     <x:ProtectScenarios>False</x:ProtectScenarios>
+    </x:WorksheetOptions>
+   </x:ExcelWorksheet>
+   <x:ExcelWorksheet>
+    <x:Name>Sheet2</x:Name>
+    <x:WorksheetOptions>
+     <x:DefaultRowHeight>225</x:DefaultRowHeight>
+     <x:ProtectContents>False</x:ProtectContents>
+     <x:ProtectObjects>False</x:ProtectObjects>
+     <x:ProtectScenarios>False</x:ProtectScenarios>
+    </x:WorksheetOptions>
+   </x:ExcelWorksheet>
+   <x:ExcelWorksheet>
+    <x:Name>Sheet3</x:Name>
+    <x:WorksheetOptions>
+     <x:DefaultRowHeight>225</x:DefaultRowHeight>
+     <x:ProtectContents>False</x:ProtectContents>
+     <x:ProtectObjects>False</x:ProtectObjects>
+     <x:ProtectScenarios>False</x:ProtectScenarios>
+    </x:WorksheetOptions>
+   </x:ExcelWorksheet>
+  </x:ExcelWorksheets>
+  <x:WindowHeight>6600</x:WindowHeight>
+  <x:WindowWidth>12000</x:WindowWidth>
+  <x:WindowTopX>0</x:WindowTopX>
+  <x:WindowTopY>1395</x:WindowTopY>
+  <x:ProtectStructure>False</x:ProtectStructure>
+  <x:ProtectWindows>False</x:ProtectWindows>
+ </x:ExcelWorkbook>
+</xml><![endif]-->
+</head>
+<body link=blue vlink=purple>

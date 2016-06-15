@@ -1,0 +1,10 @@
+<table x:str border=0 cellpadding=0 cellspacing=0 width=288 style='border-collapse: collapse;table-layout:fixed;width:216pt'>
+ <![if supportMisalignedColumns]>
+ <tr height=0 style='display:none'>
+  <td width=72 style='width:54pt'></td>
+  <td width=72 style='width:54pt'></td>
+  <td width=72 style='width:54pt'></td>
+  <td width=72 style='width:54pt'></td>
+ </tr>
+ <![endif]>
+</table>

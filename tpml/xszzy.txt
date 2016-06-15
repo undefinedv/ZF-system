@@ -1,0 +1,54 @@
+﻿create or replace procedure xszzygc (
+xsxh in xsjbxxb.xh%type,
+xyzy in varchar2,
+xsgkzf in zzysqb.gkzf%type,
+xsgkd  in zzysqb.gkd%type,
+xssqly in zzysqb.sqly%type,
+fhbz out number) as
+xn_str zzyxsmdb.xn%type;
+xq_str zzyxsmdb.xq%type;
+jd_str zzyxsmdb.kcljjd%type;
+xy_str zzysqb.SQZRXY%type;
+zy_str zzysqb.SQZRzY%type;
+xhcount number;
+bfb number;
+begin
+  begin
+    select kgbs into xhcount from zzykzb;
+    if xhcount=1 then
+      fhbz:=2;
+      goto xsxkgcend;
+    end if;
+  exception
+    when others then
+      fhbz:=2;
+      goto xsxkgcend;
+  end;
+  begin
+    select a.xn,a.xq,a.xfjdzh,a.mc2 into xn_str,xq_str,jd_str,xhcount from xsxqpmjgb a,zzykzb b where a.xn=b.xn and a.xq=b.xq and a.xh=xsxh;
+
+    select ceil(count(*)*0.3) into bfb from xsjbxxb a,xsjbxxb b where a.zymc=b.zymc and a.dqszj=b.dqszj and b.xh=xsxh;
+    if xhcount>bfb then
+      fhbz:=3;
+      goto xsxkgcend;
+    end if;
+  exception
+    when others then
+     fhbz:=3;
+     goto xsxkgcend;
+  end;
+  begin
+    select dqxn,dqxq into xn_str,xq_str from xxmc;
+    xy_str:=substr(xyzy,1,instr(xyzy,'学院',1,1)+1);
+    zy_str:=substr(xyzy,length(xy_str)+1,length(xyzy)-length(xy_str));
+    insert into zzysqb (XN,XQ,XH,XM,XB,CSNY,XY,ZY,XZB,RXNY,KCLJJD,SQZRXY,SQZRZY,GKZF,GKD,SQLY,SQSJ) select xn_str,xq_str,XH,XM,XB,CSrq,XY,ZYmc,XZB,RXrq,JD_str,xy_str,zy_str,xsGKZF,xsGKD,xsSQLY,to_char(sysdate,'yyyy-mm-dd') from xsjbxxb where xh=xsxh;
+  exception
+    when others then
+      update zzysqb set SQZRXY=xy_str,SQZRZY=zy_str,GKZF=xsgkzf,GKD=xsgkd,SQLY=xsSQLY where xh=xsxh and xn=xn_str and xq=xq_str;
+  end;
+  fhbz:=1;
+  commit;
+<<xsxkgcend>>
+  null;
+end;
+/

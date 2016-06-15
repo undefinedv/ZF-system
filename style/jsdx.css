@@ -1,0 +1,80 @@
+body {
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+    font-family: verdana, arial, helvetica, sans-serif;
+	color: #000;
+	background-color: #fff;
+	text-align: left;
+	font-size: 12px;
+}
+td {
+	font-size: 12px;
+}
+th {
+	font-size: 12px;
+}
+strong, b {
+	font-weight: bold;
+	}
+img {
+	border: 0;
+	}
+#main{
+	width:418px;
+	}
+A:link {
+	COLOR: #000; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #666; TEXT-DECORATION: none
+}
+A:active {
+	COLOR: #000; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: red; TEXT-DECORATION: underline
+}
+.jsdx_1{
+	border:1px solid #E7E7E7;
+	background:#F9F9F9;
+	text-indent:1em;
+	}
+.jsdx_11{
+	background:#fff;
+	border:1px solid #E7E7E7;
+	border-width:0px 1px;
+	}
+.jsdx_2{
+	border:1px solid #E7E7E7;
+	background:#F9F9F9;
+	text-indent:1em;
+	}
+.jsdx_22{
+	background:#fff;
+	border:1px solid #E7E7E7;
+	border-width:0px 1px;
+	}
+.jsdx_3{
+	border:1px solid #E7E7E7;
+	background:#F9F9F9;
+	text-indent:1em;
+	}
+.jsdx_33{
+	background:#fff;
+	border:1px solid #E7E7E7;
+	border-width:0px 1px 1px 1px;
+	}
+#zsdxlogin{
+	background:url(../images/jsdx/jsdx_loginbg.gif) no-repeat;
+	height:135px;
+	width:250px;
+	left: 77px;
+	top: 35px;
+	}
+.close{
+	height:15px;
+	width:15px;
+	left: 231px;
+	top: 6px;
+	cursor:hand;
+	}

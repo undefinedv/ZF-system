@@ -1,0 +1,43 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema id="ds_cjb" targetNamespace="http://www.tempuri.org/ds_cjb.xsd" xmlns:mstns="http://www.tempuri.org/ds_cjb.xsd" xmlns="http://www.tempuri.org/ds_cjb.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:element name="ds_cjb" msdata:IsDataSet="true" msdata:Locale="zh-CN">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element name="ZYDMB">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ZYDM" type="xs:string" />
+              <xs:element name="ZYMC" type="xs:string" />
+              <xs:element name="ZYLB" type="xs:string" minOccurs="0" />
+              <xs:element name="XZ" type="xs:decimal" minOccurs="0" />
+              <xs:element name="XW" type="xs:string" minOccurs="0" />
+              <xs:element name="ZYPYMB" type="xs:string" minOccurs="0" />
+              <xs:element name="ZYPYYQ" type="xs:string" minOccurs="0" />
+              <xs:element name="ZYKC" type="xs:string" minOccurs="0" />
+              <xs:element name="TSKC" type="xs:string" minOccurs="0" />
+              <xs:element name="ZYYWMC" type="xs:string" minOccurs="0" />
+              <xs:element name="SSXYDM" type="xs:string" minOccurs="0" />
+              <xs:element name="YXJ" type="xs:string" minOccurs="0" />
+              <xs:element name="SSXDM" type="xs:string" minOccurs="0" />
+              <xs:element name="ZYJC" type="xs:string" minOccurs="0" />
+              <xs:element name="TJZYDM" type="xs:string" minOccurs="0" />
+              <xs:element name="CC" type="xs:string" minOccurs="0" />
+              <xs:element name="XKLB" type="xs:string" minOccurs="0" />
+              <xs:element name="BZ" type="xs:string" minOccurs="0" />
+              <xs:element name="ZSZYDM" type="xs:string" minOccurs="0" />
+              <xs:element name="TJZYMC" type="xs:string" minOccurs="0" />
+              <xs:element name="SFWY" type="xs:string" minOccurs="0" />
+              <xs:element name="SFSF" type="xs:string" minOccurs="0" />
+              <xs:element name="SFEXW" type="xs:string" minOccurs="0" />
+              <xs:element name="KXLB" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:ZYDMB" />
+      <xs:field xpath="mstns:ZYDM" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

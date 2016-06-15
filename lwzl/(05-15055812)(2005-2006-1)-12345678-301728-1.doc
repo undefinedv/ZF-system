@@ -1,0 +1,58 @@
+<HTML>
+<HEAD>
+<TITLE>
+同学通讯录查询系统
+</TITLE>
+</HEAD>
+<BODY>
+<P ALIGN="CENTER">
+<FONT COLOR="#0000FF" SIZE="6">
+<B>人员查询系统</B>
+</FONT>
+</P>
+<FORM ACTION=”student.asp” METHOD=POST Name="f" ONSUBMIT="return check()">
+<P ALIGN="LEFT">
+<FONT COLOR="#0000FF" SIZE="3">
+<B>姓名： </B>
+</font>
+&nbsp;
+<INPUT TYPE="TEXT" NAME="name" SIZE="20" TABINDEX="1">
+</p>
+<P ALIGN="LEFT">
+<FONT COLOR="#0000FF" SIZE="3">
+<B>年龄： </B>
+</FONT>
+&nbsp;
+<INPUT TYPE="TEXT" NAME="age" SIZE="20" TABINDEX="1">
+</P>
+<P ALIGN="LEFT">
+<FONT COLOR="#0000FF" SIZE="3">
+<B>性别： </B>
+</FONT>
+&nbsp;
+<SELECT NAME="sel">
+<OPTION SELECTED VALUE="null">选择所查询人员的性别
+<OPTION VALUE="male">男
+<OPTION VALUE="female">女
+</SELECT>
+<P>
+ [<A HREF="JavaScript:f.submit()" TABINDEX =3 ONFOCUS="t=3">
+<FONT COLOR="#00CC99">查询</FONT>
+</A>]
+[<A HREF="add.asp" tabindex =3 onfocus="t=3">
+<FONT COLOR="#00CC99">添加/删除记录</FONT>
+</A>]
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+t=1;
+function check(){
+	if(t==1){document.f.name.focus();return false;}
+	if(t>1)return true;
+}	
+document.f.name.focus();
+//-->
+</SCRIPT>
+
+</BODY>
+</HTML>
+

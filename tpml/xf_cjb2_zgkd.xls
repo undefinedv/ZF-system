@@ -1,0 +1,472 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:x="urn:schemas-microsoft-com:office:excel"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=GB2312">
+<meta name=ProgId content=Excel.Sheet>
+<meta name=Generator content="Microsoft Excel 9">
+<link rel=File-List href="./xf_cjb2_zgkd.files/filelist.xml">
+<link rel=Edit-Time-Data href="./xf_cjb2_zgkd.files/editdata.mso">
+<link rel=OLE-Object-Data href="./xf_cjb2_zgkd.files/oledata.mso">
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>xky</o:Author>
+  <o:LastAuthor>zfsoft</o:LastAuthor>
+  <o:LastPrinted>2005-12-08T03:43:05Z</o:LastPrinted>
+  <o:Created>2002-05-27T17:51:00Z</o:Created>
+  <o:LastSaved>2005-12-09T11:19:04Z</o:LastSaved>
+  <o:Company>zydn</o:Company>
+  <o:Version>9.2812</o:Version>
+ </o:DocumentProperties>
+ <o:OfficeDocumentSettings>
+  <o:DownloadComponents/>
+  <o:LocationOfComponents HRef="file:///E:/msowc.cab"/>
+ </o:OfficeDocumentSettings>
+</xml><![endif]-->
+<style>
+<!--table
+	{mso-displayed-decimal-separator:"\.";
+	mso-displayed-thousand-separator:"\,";}
+@page
+	{mso-footer-data:"&L教师：&\0022Times New Roman\,常规\0022_______________\(&\0022宋体\,常规\0022签，章&\0022Times New Roman\,常规\0022\)&C第&\0022Times New Roman\,常规\0022&P&\0022宋体\,常规\0022页&R考试&\0022Times New Roman\,常规\0022\/&\0022宋体\,常规\0022查日期：&\0022Times New Roman\,常规\0022________&\0022宋体\,常规\0022年&\0022Times New Roman\,常规\0022____&\0022宋体\,常规\0022月&\0022Times New Roman\,常规\0022____&\0022宋体\,常规\0022日";
+	margin:.98in .39in .98in .98in;
+	mso-header-margin:.51in;
+	mso-footer-margin:.51in;}
+.font0
+	{color:windowtext;
+	font-size:9.0pt;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:宋体;
+	mso-generic-font-family:auto;
+	mso-font-charset:134;}
+.font7
+	{color:windowtext;
+	font-size:9.0pt;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:"Times New Roman", serif;
+	mso-font-charset:0;}
+tr
+	{mso-height-source:auto;
+	mso-ruby-visibility:none;}
+col
+	{mso-width-source:auto;
+	mso-ruby-visibility:none;}
+br
+	{mso-data-placement:same-cell;}
+.style0
+	{mso-number-format:General;
+	text-align:general;
+	vertical-align:bottom;
+	white-space:nowrap;
+	mso-rotate:0;
+	mso-background-source:auto;
+	mso-pattern:auto;
+	color:windowtext;
+	font-size:9.0pt;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:宋体;
+	mso-generic-font-family:auto;
+	mso-font-charset:134;
+	border:none;
+	mso-protection:locked visible;
+	mso-style-name:常规;
+	mso-style-id:0;}
+td
+	{mso-style-parent:style0;
+	padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	mso-ignore:padding;
+	color:windowtext;
+	font-size:9.0pt;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:宋体;
+	mso-generic-font-family:auto;
+	mso-font-charset:134;
+	mso-number-format:General;
+	text-align:general;
+	vertical-align:bottom;
+	border:none;
+	mso-background-source:auto;
+	mso-pattern:auto;
+	mso-protection:locked visible;
+	white-space:nowrap;
+	mso-rotate:0;}
+.xl24
+	{mso-style-parent:style0;
+	text-align:left;}
+.xl25
+	{mso-style-parent:style0;
+	text-align:left;
+	border:.5pt solid windowtext;}
+.xl26
+	{mso-style-parent:style0;
+	text-align:left;
+	border-top:.5pt solid windowtext;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;}
+.xl27
+	{mso-style-parent:style0;
+	text-align:left;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:.5pt solid windowtext;}
+.xl28
+	{mso-style-parent:style0;
+	text-align:left;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;}
+.xl29
+	{mso-style-parent:style0;
+	font-size:15.0pt;
+	text-align:center;
+	vertical-align:middle;}
+.xl30
+	{mso-style-parent:style0;
+	text-align:left;
+	border-top:none;
+	border-right:none;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;}
+.xl31
+	{mso-style-parent:style0;
+	text-align:center;
+	border-top:.5pt solid windowtext;
+	border-right:none;
+	border-bottom:1.0pt solid windowtext;
+	border-left:.5pt solid windowtext;}
+.xl32
+	{mso-style-parent:style0;
+	text-align:center;
+	border-top:.5pt solid windowtext;
+	border-right:none;
+	border-bottom:1.0pt solid windowtext;
+	border-left:none;}
+.xl33
+	{mso-style-parent:style0;
+	border-top:1.0pt solid windowtext;
+	border-right:none;
+	border-bottom:.5pt solid windowtext;
+	border-left:1.0pt solid windowtext;}
+.xl34
+	{mso-style-parent:style0;
+	border-top:1.0pt solid windowtext;
+	border-right:none;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;}
+.xl35
+	{mso-style-parent:style0;
+	border-top:1.0pt solid windowtext;
+	border-right:.5pt solid black;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;}
+.xl36
+	{mso-style-parent:style0;
+	border-top:1.0pt solid windowtext;
+	border-right:none;
+	border-bottom:.5pt solid windowtext;
+	border-left:.5pt solid black;}
+.xl37
+	{mso-style-parent:style0;
+	border-top:1.0pt solid windowtext;
+	border-right:1.0pt solid black;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;}
+.xl38
+	{mso-style-parent:style0;
+	border-top:.5pt solid windowtext;
+	border-right:none;
+	border-bottom:.5pt solid windowtext;
+	border-left:1.0pt solid windowtext;}
+.xl39
+	{mso-style-parent:style0;
+	border-top:.5pt solid windowtext;
+	border-right:none;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;}
+.xl40
+	{mso-style-parent:style0;
+	border-top:.5pt solid windowtext;
+	border-right:.5pt solid black;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;}
+.xl41
+	{mso-style-parent:style0;
+	border-top:.5pt solid windowtext;
+	border-right:none;
+	border-bottom:.5pt solid windowtext;
+	border-left:.5pt solid black;}
+.xl42
+	{mso-style-parent:style0;
+	border-top:.5pt solid windowtext;
+	border-right:1.0pt solid black;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;}
+.xl43
+	{mso-style-parent:style0;
+	border-top:.5pt solid windowtext;
+	border-right:none;
+	border-bottom:1.0pt solid windowtext;
+	border-left:1.0pt solid windowtext;}
+.xl44
+	{mso-style-parent:style0;
+	border-top:.5pt solid windowtext;
+	border-right:none;
+	border-bottom:1.0pt solid windowtext;
+	border-left:none;}
+.xl45
+	{mso-style-parent:style0;
+	border-top:.5pt solid windowtext;
+	border-right:.5pt solid black;
+	border-bottom:1.0pt solid windowtext;
+	border-left:none;}
+.xl46
+	{mso-style-parent:style0;
+	border-top:.5pt solid windowtext;
+	border-right:none;
+	border-bottom:1.0pt solid windowtext;
+	border-left:.5pt solid black;}
+.xl47
+	{mso-style-parent:style0;
+	border-top:.5pt solid windowtext;
+	border-right:1.0pt solid black;
+	border-bottom:1.0pt solid windowtext;
+	border-left:none;}
+.xl48
+	{mso-style-parent:style0;
+	text-align:left;
+	border-top:1.0pt solid windowtext;
+	border-right:none;
+	border-bottom:none;
+	border-left:none;}
+ruby
+	{ruby-align:left;}
+rt
+	{color:windowtext;
+	font-size:9.0pt;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:宋体;
+	mso-generic-font-family:auto;
+	mso-font-charset:134;
+	mso-char-type:none;
+	display:none;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <x:ExcelWorkbook>
+  <x:ExcelWorksheets>
+   <x:ExcelWorksheet>
+    <x:Name>Sheet1</x:Name>
+    <x:WorksheetOptions>
+     <x:DefaultRowHeight>225</x:DefaultRowHeight>
+     <x:Print>
+      <x:ValidPrinterInfo/>
+      <x:PaperSizeIndex>13</x:PaperSizeIndex>
+      <x:HorizontalResolution>-3</x:HorizontalResolution>
+      <x:VerticalResolution>200</x:VerticalResolution>
+     </x:Print>
+     <x:Selected/>
+     <x:Panes>
+      <x:Pane>
+       <x:Number>3</x:Number>
+       <x:ActiveRow>3</x:ActiveRow>
+      </x:Pane>
+     </x:Panes>
+     <x:ProtectContents>False</x:ProtectContents>
+     <x:ProtectObjects>False</x:ProtectObjects>
+     <x:ProtectScenarios>False</x:ProtectScenarios>
+    </x:WorksheetOptions>
+   </x:ExcelWorksheet>
+   <x:ExcelWorksheet>
+    <x:Name>Sheet2</x:Name>
+    <x:WorksheetOptions>
+     <x:DefaultRowHeight>225</x:DefaultRowHeight>
+     <x:ProtectContents>False</x:ProtectContents>
+     <x:ProtectObjects>False</x:ProtectObjects>
+     <x:ProtectScenarios>False</x:ProtectScenarios>
+    </x:WorksheetOptions>
+   </x:ExcelWorksheet>
+   <x:ExcelWorksheet>
+    <x:Name>Sheet3</x:Name>
+    <x:WorksheetOptions>
+     <x:DefaultRowHeight>225</x:DefaultRowHeight>
+     <x:ProtectContents>False</x:ProtectContents>
+     <x:ProtectObjects>False</x:ProtectObjects>
+     <x:ProtectScenarios>False</x:ProtectScenarios>
+    </x:WorksheetOptions>
+   </x:ExcelWorksheet>
+  </x:ExcelWorksheets>
+  <x:WindowHeight>6600</x:WindowHeight>
+  <x:WindowWidth>12000</x:WindowWidth>
+  <x:WindowTopX>0</x:WindowTopX>
+  <x:WindowTopY>1395</x:WindowTopY>
+  <x:ProtectStructure>False</x:ProtectStructure>
+  <x:ProtectWindows>False</x:ProtectWindows>
+ </x:ExcelWorkbook>
+ <x:ExcelName>
+  <x:Name>Print_Titles</x:Name>
+  <x:SheetIndex>1</x:SheetIndex>
+  <x:Formula>=Sheet1!$1:$4</x:Formula>
+ </x:ExcelName>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1026"/>
+</xml><![endif]-->
+</head>
+
+<body link=blue vlink=purple>
+
+<table x:str border=0 cellpadding=0 cellspacing=0 width=519 style='border-collapse:
+ collapse;table-layout:fixed;width:390pt'>
+ <col width=35 style='mso-width-source:userset;mso-width-alt:1493;width:26pt'>
+ <col width=95 style='mso-width-source:userset;mso-width-alt:4053;width:71pt'>
+ <col width=64 style='mso-width-source:userset;mso-width-alt:2730;width:48pt'>
+ <col width=60 style='mso-width-source:userset;mso-width-alt:2560;width:45pt'>
+ <col width=53 span=5 style='mso-width-source:userset;mso-width-alt:2261;
+ width:40pt'>
+ <tr height=26 style='height:19.5pt'>
+  <td colspan=9 height=26 class=xl29 width=519 style='height:19.5pt;width:390pt'></td>
+ </tr>
+ <tr height=15 style='height:11.25pt'>
+  <td colspan=3 height=15 class=xl24 style='height:11.25pt'></td>
+  <td colspan=3 class=xl24></td>
+  <td colspan=3 class=xl24></td>
+ </tr>
+ <tr height=15 style='height:11.25pt'>
+  <td colspan=3 height=15 class=xl30 style='height:11.25pt'>　</td>
+  <td colspan=3 class=xl30>　</td>
+  <td colspan=3 class=xl30>　</td>
+ </tr>
+ <tr height=18 style='mso-height-source:userset;height:13.5pt'>
+  <td height=18 class=xl25 style='height:13.5pt;border-top:none'>序号</td>
+  <td class=xl26 style='border-top:none'>班级</td>
+  <td class=xl26 style='border-top:none'>学号</td>
+  <td class=xl26 style='border-top:none'>姓名</td>
+  <td class=xl26 style='border-top:none'>平时</td>
+  <td class=xl26 style='border-top:none'>期末</td>
+  <td class=xl26 style='border-top:none'>实验</td>
+  <td class=xl26 style='border-top:none'>总评</td>
+  <td class=xl26 style='border-top:none'>备注</td>
+ </tr>
+ <tr class=xl24 height=18 style='mso-height-source:userset;height:13.5pt'>
+  <td height=18 class=xl27 style='height:13.5pt'>　</td>
+  <td class=xl28>　</td>
+  <td class=xl28>　</td>
+  <td class=xl28>　</td>
+  <td class=xl28>　</td>
+  <td class=xl28>　</td>
+  <td class=xl28>　</td>
+  <td class=xl28>　</td>
+  <td class=xl28>　</td>
+ </tr>
+ <tr height=17 style='height:12.75pt'>
+  <td colspan=9 height=17 class=xl31 style='height:12.75pt'>考试<font
+  class=font7>/</font><font class=font0>考查成绩统计</font></td>
+ </tr>
+ <tr height=15 style='height:11.25pt'>
+  <td colspan=3 height=15 class=xl33 style='border-right:.5pt solid black;
+  height:11.25pt'>90分以上（优秀）</td>
+  <td colspan=2 class=xl36 style='border-right:.5pt solid black;border-left:
+  none'>　</td>
+  <td colspan=4 class=xl36 style='border-right:1.0pt solid black;border-left:
+  none'>　</td>
+ </tr>
+ <tr height=15 style='height:11.25pt'>
+  <td colspan=3 height=15 class=xl38 style='border-right:.5pt solid black;
+  height:11.25pt'>80-89分（良好）</td>
+  <td colspan=2 class=xl41 style='border-right:.5pt solid black;border-left:
+  none'>　</td>
+  <td colspan=4 class=xl41 style='border-right:1.0pt solid black;border-left:
+  none'>　</td>
+ </tr>
+ <tr height=15 style='height:11.25pt'>
+  <td colspan=3 height=15 class=xl38 style='border-right:.5pt solid black;
+  height:11.25pt'>70-79分（中等）</td>
+  <td colspan=2 class=xl41 style='border-right:.5pt solid black;border-left:
+  none'>　</td>
+  <td colspan=4 class=xl41 style='border-right:1.0pt solid black;border-left:
+  none'>　</td>
+ </tr>
+ <tr height=15 style='height:11.25pt'>
+  <td colspan=3 height=15 class=xl38 style='border-right:.5pt solid black;
+  height:11.25pt'>60-69分（及格）</td>
+  <td colspan=2 class=xl41 style='border-right:.5pt solid black;border-left:
+  none'>　</td>
+  <td colspan=4 class=xl41 style='border-right:1.0pt solid black;border-left:
+  none'>　</td>
+ </tr>
+ <tr height=15 style='height:11.25pt'>
+  <td colspan=3 height=15 class=xl38 style='border-right:.5pt solid black;
+  height:11.25pt'>不及格（不及格）</td>
+  <td colspan=2 class=xl41 style='border-right:.5pt solid black;border-left:
+  none'>　</td>
+  <td colspan=4 class=xl41 style='border-right:1.0pt solid black;border-left:
+  none'>　</td>
+ </tr>
+ <tr height=15 style='height:11.25pt'>
+  <td colspan=3 height=15 class=xl38 style='border-right:.5pt solid black;
+  height:11.25pt'>其他</td>
+  <td colspan=2 class=xl41 style='border-right:.5pt solid black;border-left:
+  none'>　</td>
+  <td colspan=4 class=xl41 style='border-right:1.0pt solid black;border-left:
+  none'>　</td>
+ </tr>
+ <tr height=15 style='height:11.25pt'>
+  <td colspan=3 height=15 class=xl38 style='border-right:.5pt solid black;
+  height:11.25pt'>合计</td>
+  <td colspan=2 class=xl41 style='border-right:.5pt solid black;border-left:
+  none'>　</td>
+  <td colspan=4 class=xl41 style='border-right:1.0pt solid black;border-left:
+  none'>　</td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td colspan=3 height=16 class=xl43 style='border-right:.5pt solid black;
+  height:12.0pt'>缓考</td>
+  <td colspan=2 class=xl46 style='border-right:.5pt solid black;border-left:
+  none'>免休</td>
+  <td colspan=4 class=xl46 style='border-right:1.0pt solid black;border-left:
+  none'>实考</td>
+ </tr>
+ <tr height=15 style='height:11.25pt'>
+  <td colspan=9 height=15 class=xl48 style='height:11.25pt'>　</td>
+ </tr>
+ <tr height=15 style='height:11.25pt'>
+  <td colspan=4 height=15 class=xl24 style='height:11.25pt'></td>
+  <td colspan=5 class=xl24></td>
+ </tr>
+ <tr height=15 style='height:11.25pt'>
+  <td colspan=9 height=15 class=xl24 style='height:11.25pt'>说明：任课教师应于考试/查后三天内，将本表一式两份报至所在学院。</td>
+ </tr>
+ <![if supportMisalignedColumns]>
+ <tr height=0 style='display:none'>
+  <td width=35 style='width:26pt'></td>
+  <td width=95 style='width:71pt'></td>
+  <td width=64 style='width:48pt'></td>
+  <td width=60 style='width:45pt'></td>
+  <td width=53 style='width:40pt'></td>
+  <td width=53 style='width:40pt'></td>
+  <td width=53 style='width:40pt'></td>
+  <td width=53 style='width:40pt'></td>
+  <td width=53 style='width:40pt'></td>
+ </tr>
+ <![endif]>
+</table>
+
+</body>
+
+</html>

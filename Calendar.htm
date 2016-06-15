@@ -1,0 +1,344 @@
+<HTML><HEAD><TITLE>Calendar</TITLE>
+<linkrel="shortcuticon" href="Calendar.ICO">
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<META http-equiv=expires content=0>
+<STYLE>
+TD {
+	BORDER-RIGHT: gainsboro 1pt solid; BORDER-TOP: gainsboro 1pt solid; FONT-SIZE: 8pt; BORDER-LEFT: gainsboro 1pt solid; COLOR: black; BORDER-BOTTOM: gainsboro 1pt solid; FONT-FAMILY: arial; TEXT-ALIGN: center
+}
+TH {
+	FONT-SIZE: 8pt; COLOR: white; FONT-FAMILY: arial; BACKGROUND-COLOR: steelblue
+}
+TD#today {
+	BACKGROUND-COLOR: lightsteelblue
+}
+SELECT {
+	FONT-SIZE: 8pt; FONT-FAMILY: arial
+}
+</STYLE>
+
+<SCRIPT language=JScript>
+function doMouseOver(e)
+{
+	e.runtimeStyle.border = "1pt solid #336699"
+	e.runtimeStyle.backgroundColor = "khaki"
+}
+function doMouseOut(e)
+{
+	e.runtimeStyle.border = e.style.border
+	e.runtimeStyle.backgroundColor = ""
+}
+</SCRIPT>
+
+<SCRIPT language=jscript>
+var dateFormat, fieldValue, monthNames, MonthWidth, YearWidth, YearType, calendarYear, calendarMonth, dayNames, currentMonth, currentYear, currentDay
+
+//toLowerCase 小写转换
+////////////////////////////////////////////////////////////////////////////////////////////////////
+function initialise()
+////////////////////////////////////////////////////////////////////////////////////////////////////
+{
+	dateFormat = window.dialogArguments.dateFormat
+
+	if (dateFormat == "ymd")
+	{
+		dateFormat = "y-m-d"
+		var ReplaceValue = window.dialogArguments.value.replace(/[-\/.]/g,"")
+		fieldValue = ReplaceValue.substr(0,4) + "-" + ReplaceValue.substr(4,2) + "-" + ReplaceValue.substr(6,2)
+	}
+	else
+	{
+		var separator = dateFormat.toLowerCase().replace(/[ymd]/g,'').substr(0,1)
+		var ReplaceValue = window.dialogArguments.value.replace(/[-\/.]/g,"")
+		fieldValue = ReplaceValue.substr(0,4) + separator + ReplaceValue.substr(4,2) + separator + ReplaceValue.substr(6,2)
+	}
+
+   monthNames = ["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"]
+   YearType = "0"
+	dayNames = ["日","一","二","三","四","五","六"]
+
+	dialogTop = window.event.screenY + "px"
+	dialogLeft = window.event.screenX + "px"
+	dialogWidth = "190px"
+	dialogHeight = "190px"
+
+	header.innerHTML = createHeader()
+
+	if (YearType == "0")
+	{
+		MonthWidth = "55pt"
+		YearWidth = "45pt"
+	}
+	else
+	{
+		MonthWidth = "45pt"
+		yearWidth = "55pt"
+	}
+
+	if (fieldValue != '')
+		fieldValue = fieldValue.split(' ')[0]
+
+	if (isDate(fieldValue))
+	{
+		calendarMonth = datePart('m',fieldValue)
+		calendarYear = datePart('y',fieldValue)
+		currentDay = datePart('d',fieldValue)
+	}
+	else
+	{
+		var d = new Date()
+		calendarMonth = d.getMonth()+1
+		calendarYear = d.getFullYear()
+		currentDay = d.getDate()
+	}
+	currentMonth = calendarMonth
+	currentYear = calendarYear
+	createCalendar()
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+function finalise()
+////////////////////////////////////////////////////////////////////////////////////////////////////
+{
+	window.returnValue = fieldValue
+}
+
+selectMonth
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+function createHeader()
+////////////////////////////////////////////////////////////////////////////////////////////////////
+{
+		var html = "<table cellspacing=0 bgcolor=gainsboro border=0 width=180px>"
+		html += "<tr>"
+		html += "<td align=center><button onclick=changeMonth(-1) style='height:14pt'>&lt;</button></td>"
+		html += "<td align=center colspan=5 nowrap>" +  yearOptions() + monthOptions() + "</td>"
+		html += "<td align=center><button onclick=changeMonth(1) style='height:14pt'>&gt;</button></td>"
+		html += "</tr></table>"
+		return html
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+function monthOptions()
+////////////////////////////////////////////////////////////////////////////////////////////////////
+{
+	var html = ''
+	for (var i=1;i<=12;i++)
+		html += "<option value=" + i + ">" + monthNames[i-1] + "</option>"
+	return "<select id=monthSelect onchange=selectMonth(this) style='width:" + MonthWidth + "'>" + html + "</select>"
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+function yearOptions()
+////////////////////////////////////////////////////////////////////////////////////////////////////
+{
+	var html = ''
+	for (var i=1900;i<2100;i++)
+		if (YearType == "1")
+			html += "<option value=" + i + ">" + Transform("" + i + "")
+		else
+			html += "<option value=" + i + ">" + i
+	return "<select id=yearSelect onchange=selectYear(this) style='width:" + YearWidth + "'>" + html + "</select>"
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+function selectDate(cell)
+////////////////////////////////////////////////////////////////////////////////////////////////////
+{
+	dateArray = new Array(3)
+
+	var dateSequence = dateFormat.toLowerCase().replace(/[^ymd]/g,'')
+
+	if (cell.innerText.length == 1)
+		cell.innerText = "0" + cell.innerText
+
+	dateArray[dateSequence.indexOf('d')] = cell.innerText
+
+	if (calendarMonth < 10)
+		dateArray[dateSequence.indexOf('m')] = "0" + calendarMonth
+	else
+		dateArray[dateSequence.indexOf('m')] = calendarMonth
+
+	dateArray[dateSequence.indexOf('y')] = calendarYear
+
+	var separator = dateFormat.toLowerCase().replace(/[ymd]/g,'').substr(0,1)
+
+	fieldValue = dateArray[0] + separator + dateArray[1] + separator + dateArray[2]
+	window.returnvalue = fieldValue
+	window.close()
+
+
+	var dateSequence = dateFormat.toLowerCase().replace(/[^ymd]/g,'')
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+function selectMonth()
+////////////////////////////////////////////////////////////////////////////////////////////////////
+{
+	calendarMonth = parseInt(monthSelect.value,10)
+	createCalendar()
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+function selectYear()
+////////////////////////////////////////////////////////////////////////////////////////////////////
+{
+	calendarYear = parseInt(yearSelect.value)
+	createCalendar()
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+function changeMonth(adj)
+////////////////////////////////////////////////////////////////////////////////////////////////////
+{
+	calendarMonth += adj
+	if (calendarMonth == 13)
+	{
+		calendarMonth = 1
+		calendarYear += 1
+	}
+	if (calendarMonth == 0)
+	{
+		calendarMonth = 12
+		calendarYear -= 1
+	}
+	createCalendar()
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+function createCalendar()
+////////////////////////////////////////////////////////////////////////////////////////////////////
+{
+	var month = calendarMonth
+	var year = calendarYear
+	var d = new Date()
+	d.setDate(1)
+	d.setMonth(month-1)
+	d.setYear(year)
+	var firstDay
+	var monthArray = new Array(6)
+	for (var i=0;i<monthArray.length;i++)
+		monthArray[i] = new Array(7)
+	for (var day=1;day<32;day++)
+	{
+		d.setDate(day)
+		if (day == 1)
+			firstDay = d.getDay()
+		if ((d.getMonth()+1)== month)
+		{
+			var weekNo = parseInt(((( firstDay + day -1 ) /7 )*1))
+			monthArray[weekNo][d.getDay()] = d.getDate()
+		}
+	}
+
+	var html = '<table cellspacing=0 width=175px>'
+	html += "<tr>"
+	for (var i=0;i<dayNames.length;i++)
+		html += '<th style="width:14%">' + dayNames[i] + '</th>'
+
+	html += "</tr>"
+
+	var borderColour
+	for (var i=0;i<monthArray.length;i++)
+	{
+		html += '<tr>'
+		for (var j=0;j<monthArray[i].length;j++)
+		{
+			if (typeof(monthArray[i][j]) == 'undefined')
+				html += '<td></td>'
+			else
+			{
+				if (calendarYear == currentYear && calendarMonth == currentMonth && currentDay == monthArray[i][j])
+					borderColour = 'orangered'
+				else
+					borderColour = 'gainsboro'
+
+				html += "<td style='border:1pt solid " + borderColour + ";cursor:hand;' class=datecell onclick=selectDate(this) onmouseover=doMouseOver(this) onmouseout=doMouseOut(this)>" + monthArray[i][j] + '</td>'
+			}
+		}
+		html += '</tr>'
+	}
+
+	html += '</table>'
+
+	monthSelect.value = month
+	yearSelect.value = year
+
+	calcell.innerHTML = html
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+function isDate(dateValue)
+//////////////////////////////////////////////////////////////////////////////////////////////
+{
+	var dateSequence = dateFormat.toLowerCase().replace(/[^ymd]/g,'')
+
+	var objRegExp = /^\d{1,4}( |-|\/|\.)\d{1,4}\1\d{1,4}$/
+	if(!objRegExp.test(dateValue))
+		return false
+
+	var arrayDate = dateValue.split(RegExp.$1) //split date into month, day, year
+
+	var intDay = parseInt(arrayDate[dateSequence.indexOf('d')],10)
+	var intMonth = parseInt(arrayDate[dateSequence.indexOf('m')],10)
+	var intYear = parseInt(arrayDate[dateSequence.indexOf('y')],10)
+
+	if (intYear < 30)
+		intYear+=2000
+	if (intYear < 100)
+		intYear+=1900
+
+	var d = new Date( intYear, intMonth-1, intDay )
+
+	if ( (d.getFullYear() != intYear) ||  (d.getMonth() != intMonth-1)  || (d.getDate() != intDay) || (intYear < 1000) )
+		return false
+
+	return true
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+function datePart(part, dateValue)
+//////////////////////////////////////////////////////////////////////////////////////////////
+{
+
+	var dateSequence = dateFormat.toLowerCase().replace(/[^ymd]/g,'') //将字符串中的 ymd 替换成 空格
+
+	var objRegExp = /^\d{1,4}( |-|\/|\.)\d{1,4}\1\d{1,4}$/
+	objRegExp.test(dateValue)
+	var arrayDate = dateValue.split(RegExp.$1) //split date into month, day, year
+
+	return parseInt(arrayDate[dateSequence.indexOf(part)],10)
+}
+
+
+function Transform(YearNum)
+{
+	//转换整数部分
+	var i=1
+	var len = YearNum.length
+
+	var zw = new Array("〇","一","二","三","四","五","六","七","八","九")//整数部分用
+	var str=""
+
+	for(i=1; i<=len;i++)
+	{	var n = YearNum.charAt(i-1)
+		str = str + zw[Number(n)]
+	}
+
+	return str
+}
+
+
+</SCRIPT>
+
+<META content="MSHTML 6.00.2800.1170" name=GENERATOR></HEAD>
+<BODY bgColor=gainsboro scroll=no onload=initialise() onunload=finalise()>
+<CENTER>
+<TABLE cellSpacing=0 border=0>
+  <TBODY>
+  <TR>
+    <TD id=header vAlign=center align=middle>&nbsp; </TD></TR>
+  <TR>
+    <TD id=calcell vAlign=center align=middle>&nbsp;
+</TD></TR></TBODY></TABLE></CENTER></BODY></HTML>

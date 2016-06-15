@@ -1,0 +1,4 @@
+1、安装SOAP Toolkit 3.0.exe
+2、样例代码（asp调用）vb_webservice.asp
+3、样例代码（javascript调用）js_webservice.js
+4、具体使用，参照调用说明

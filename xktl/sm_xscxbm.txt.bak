@@ -1,0 +1,244 @@
+
+---cyf---2006-02-22---
+alter table sjdb add (sj6 VARCHAR2(2));
+alter table sjdb add (sj7 VARCHAR2(2),sj8 VARCHAR2(2),sj9 VARCHAR2(2));
+update sjdb set sj6='0' where sj6 is null;
+update sjdb set sj7='0',sj8='0',sj9='0' where sj7 is null;
+commit;
+---end----
+
+
+---cyf---2006-02-22---
+create or replace view KBVIEW as 
+select distinct substr(xkkh,2,9) xn,substr(xkkh,12,1) xq,      tjkbdm,     xkkh,jszgh,  jsbh,xqj,    qssjd,  dsz,to_char(qsz) qsz,to_char(jsz) jsz,  skcd,'pk' pk,sknr,' ' bz from GBFSJDAPXX_dmVIEW
+union all select               a.xn,       to_char(a.xq),(case when c.bjdm='无' then c.nj||c.zydm else c.bjdm end)
+                                                                        ,b.xkkh,b.jszgh,b.jsbh,a.xqj,a.qssjd,a.dsz,  to_char(b.qsz),  to_char(b.jsz),a.skcd,'bk'||a.bkkcmc,a.sknr1,'' from bksjapb a,bkdjjsfpb b,bkzyfpb c
+          where a.bkdm=b.bkdm and a.bkkcmc=b.bkkcmc and a.nj=b.nj and a.xn=b.xn and a.xq=b.xq and  a.bkdm=c.bkdm and a.bkkcmc=c.bkkcmc and a.nj=c.nj and a.xn=c.xn and a.xq=c.xq and a.xn like '2%' and b.xn like '2%'   and (a.xqj=b.xqj or b.xqj=0) and (a.qssjd=b.qssjd or b.Qssjd=0)   and ('A'||a.dsz='A'||b.dsz or b.dsz='0')
+union all select distinct        xn,         to_char(xq),        'Zf',     xkkh,jszgh,  jsbh,xqj,    qssjd,  dsz,    to_char(qsz),    to_char(jsz),  skcd,'qt','5','' from qtkapbview where xkkh like '(%'
+union all select                 xn,         to_char(xq),        'Zf',    '借用',   '',  jsbh,XQJ,      SJD,  dsz,    to_char(ksz),    to_char(jsz),  skcd,'jy','5',sjgr||'/'||jydw||'/'||jyly from jxcdyyb where bz='4'
+union all select                 xn,                  xq,        'Zf','教室限制',   '',    dm,XQJ,    qssjd,   '',              '',              '',  skcd,'xz','5','' from pksjxz where lb='教室'
+union all select                 xn,                  xq,        'Zf','教师限制',   dm,    '',XQJ,    qssjd,   '',              '',              '',  skcd,'xz','5','' from pksjxz where lb='教师'
+union all select                 xn,                  xq,          dm,'专业限制',   '',    '',XQJ,    qssjd,   '',              '',              '',  skcd,'xz','5','' from pksjxz where lb='专业'
+union all select distinct        xn,                  xq,        'Zf',     xkkh,jszgh,  jsbh,xqj,    qssjd,  dsz,    to_char(ksz),    to_char(jsz),  skcd,'cx','5',''  from cxbskb
+/
+--end
+
+
+-----xzm-2006-02-22-begin---
+create table bjrwjcb(
+xn varchar2(10),
+xq varchar2(2),
+bjmc varchar2(50),
+skqsz varchar2(20),
+fxksz varchar2(20),
+ldqsz varchar2(20),
+jxsjz varchar2(20),
+zyjxz varchar2(20),
+zysxz varchar2(20),
+bylwz varchar2(20),
+jd varchar2(20),
+jyzs varchar2(20),
+primary key(xn,xq,bjmc));
+commit;
+----end
+
+
+------zyl--2006-02-23--begin
+alter table kcdmb add(syxfyq varchar2(10));
+commit;
+
+----end
+
+--cyf--2006-02-23--
+comment on column XXMC.JSJYD              is 'N04  打印教室借用单时，1表示别一种格式：显示具体时间';
+comment on column XXMC.JSJY_WSSJ          is 'N04  后台打印教室借用单时晚上显示的具体时间，如：18:30-21:00。可以为空 ';
+update xxmc set jsjyd='1' where xxmc='北京理工大学';
+commit;
+---end 
+
+
+-----xzm-2006-02-23-begin
+alter table tykkcdmb add kkbmdm varchar2(10);
+commit;
+create or replace view kcdmbview as
+select KCDM,KCZWMC,KCYWMC,XF,ZXS,ZS,YXYQ,KCJJ,BS1,BS2,zcfy,cxfy,fxfy,kkbmdm,kcxz,kthkcdm,kclb,bsfbj from kcdmb
+union all select KCDM,KCZWMC,KCYWMC,XF,ZXS,ZS,YXYQ,KCJJ,BS1,BS2,zcfy,cxfy,fxfy,kkbmdm,'体育项目',kthkcdm,'体育项目' kclb,'' bsfbj from tykkcdmb
+/
+commit;
+------end
+
+--cyf--2006-02-23--
+create table yydmb(lb varchar2(8),yydm number(6),yymc varchar2(240));
+commit;
+---end 
+
+
+--cyf--2006-02-23--
+alter table fxjxjhkcxxb add (kcqmc varchar2(50));
+alter table fxjxjhkcxxb add (qsjsz varchar2(20));
+commit;
+---end 
+
+
+--cyf--2006-02-23--
+alter table xxmc add (Xs_jsyuy varchar2(4) default '0');
+comment on column XXMC.Xs_jsyuy              is 'N12  web学生用户在教室预约（xxjsjy.aspx）时，是否只能查看空教室而不能预约。1：是；0：否。';
+update xxmc set Xs_jsyuy='1' where xxmc='北京理工大学';
+commit;
+--end---
+
+--cyf--2006-02-23--
+alter table jxcdyuyb add (xuh number(6),zwsjd varchar2(20));
+alter table jxcdyuyb drop primary key;
+update jxcdyuyb set xuh=rownum+(select case when max(xuh) is null then 0 else max(xuh) end from jxcdyuyb where xn='2005-2006' and xq='2') where xn='2005-2006' and xq='2' and xuh is null;
+update jxcdyuyb set xuh=rownum+(select case when max(xuh) is null then 0 else max(xuh) end from jxcdyuyb where xn='2005-2006' and xq='1') where xn='2005-2006' and xq='1' and xuh is null;
+update jxcdyuyb set xuh=rownum+(select case when max(xuh) is null then 0 else max(xuh) end from jxcdyuyb where xn='2004-2005' and xq='2') where xn='2004-2005' and xq='2' and xuh is null;
+update jxcdyuyb set xuh=rownum+(select case when max(xuh) is null then 0 else max(xuh) end from jxcdyuyb where xn='2004-2005' and xq='1') where xn='2004-2005' and xq='1' and xuh is null;
+update jxcdyuyb set xuh=rownum+(select case when max(xuh) is null then 0 else max(xuh) end from jxcdyuyb where xn='2003-2004' and xq='2') where xn='2003-2004' and xq='2' and xuh is null;
+update jxcdyuyb set xuh=rownum+(select case when max(xuh) is null then 0 else max(xuh) end from jxcdyuyb where xn='2003-2004' and xq='1') where xn='2003-2004' and xq='1' and xuh is null;
+alter table jxcdyuyb add primary key(xn,xq,xuh);
+
+update jxcdyuyb a set a.zwsjd=(select b.zwsjd from sjdb b where (b.sj1=a.sjd or b.sj2=a.sjd or b.sj3=a.sjd or b.sj4=a.sjd or b.sj5=a.sjd or b.sj6=a.sjd or b.sj7=a.sjd or b.sj8=a.sjd or b.sj9=a.sjd) and rownum=1) where a.zwsjd is null;
+
+commit;
+
+
+alter table jxcdyyb add (ly varchar2(4));
+alter table jxcdyyb add (xuh number(6));
+update jxcdyyb set ly='Jy' where ly is null;
+update jxcdyyb set xuh=rownum+(select case when max(xuh) is null then 0 else max(xuh) end from jxcdyyb where xn='2005-2006' and xq='2') where xn='2005-2006' and xq='2' and xuh is null;
+update jxcdyyb set xuh=rownum+(select case when max(xuh) is null then 0 else max(xuh) end from jxcdyyb where xn='2005-2006' and xq='1') where xn='2005-2006' and xq='1' and xuh is null;
+update jxcdyyb set xuh=rownum+(select case when max(xuh) is null then 0 else max(xuh) end from jxcdyyb where xn='2004-2005' and xq='2') where xn='2004-2005' and xq='2' and xuh is null;
+update jxcdyyb set xuh=rownum+(select case when max(xuh) is null then 0 else max(xuh) end from jxcdyyb where xn='2004-2005' and xq='1') where xn='2004-2005' and xq='1' and xuh is null;
+update jxcdyyb set xuh=rownum+(select case when max(xuh) is null then 0 else max(xuh) end from jxcdyyb where xn='2003-2004' and xq='2') where xn='2003-2004' and xq='2' and xuh is null;
+update jxcdyyb set xuh=rownum+(select case when max(xuh) is null then 0 else max(xuh) end from jxcdyyb where xn='2003-2004' and xq='1') where xn='2003-2004' and xq='1' and xuh is null;
+update jxcdyyb a set a.zwsjd=(select b.zwsjd from sjdb b where (b.sj1=a.sjd or b.sj2=a.sjd or b.sj3=a.sjd or b.sj4=a.sjd or b.sj5=a.sjd or b.sj6=a.sjd or b.sj7=a.sjd or b.sj8=a.sjd or b.sj9=a.sjd) and rownum=1) where a.zwsjd is null;
+
+commit;
+
+alter table jxcdyuyb add (shbj varchar2(6));
+alter table jxcdyuyb add (fkyj varchar2(40));
+update jxcdyuyb set shbj='批准' where jyjsbh is not null;
+commit;
+
+alter table jxcdyuyb modify(jsbh varchar2(250),jsmc varchar2(250),jyjsbh varchar2(250),jyjsmc varchar2(250));
+alter table jxcdyyb add(jsbh1 varchar2(250),jsmc1 varchar2(250));
+update jxcdyyb set jsbh1=jsbh,jsmc1=jsmc where jsbh1 is null;
+commit;
+---end 
+
+
+-------xzm-2006-02-23-begin
+---成绩确认部门设置表
+create table cjqrbmszb(
+nj varchar2(6),
+xn varchar2(10),
+xq varchar2(4),
+kssj varchar2(20),
+jssj varchar2(20),
+sfxzxk varchar2(2),
+sfxzccj varchar2(2),
+yxf varchar2(2),
+primary key (nj,xn,xq)
+);
+comment on column cjqrbmszb.nj      is '099年级' ;    
+comment on column cjqrbmszb.xn      is '099学年' ;
+comment on column cjqrbmszb.xq      is '099学期' ;
+comment on column cjqrbmszb.kssj    is '099开始时间' ;
+comment on column cjqrbmszb.jssj    is '099结束时间' ;
+comment on column cjqrbmszb.sfxzxk  is '099是否限制选课' ;
+comment on column cjqrbmszb.sfxzccj is '099是否限制查成绩' ;
+comment on column cjqrbmszb.yxf     is '099有效否' ;
+
+----成绩确认学生核查表
+
+create table cjqrxshcb(
+id varchar2(10),
+xh   varchar2(20),
+xkkh varchar2(30),
+xn   varchar2(20),
+xq   varchar2(4),
+pscj varchar2(10),
+qzcj varchar2(10),
+sycj varchar2(10),
+qmcj varchar2(10),
+ycj  varchar2(10),
+sqcj varchar2(10),
+xcj  varchar2(10),
+sqly varchar2(200),
+hcnr varchar2(10),
+jshc varchar2(4),
+jsyj varchar2(200),
+xyhc varchar2(4),
+xyyj varchar2(200),
+jwchc varchar2(4),
+jwcyj varchar2(200),
+jsxm   varchar2(50),
+xyhcr  varchar2(20),
+jwchcr varchar2(20),
+bczt varchar2(6),
+sqrq varchar2(20),
+tgzr varchar2(4),
+primary key (xh,xkkh,xn,xq)
+);
+
+comment on column cjqrxshcb.id         is '099申请编号';
+comment on column cjqrxshcb.xh         is '099学号';
+comment on column cjqrxshcb.xkkh       is '099选课课号';   
+comment on column cjqrxshcb.xn         is '099学年';
+comment on column cjqrxshcb.xq         is '099学期';
+comment on column cjqrxshcb.pscj       is '099平时成绩';
+comment on column cjqrxshcb.qzcj       is '099期中成绩';
+comment on column cjqrxshcb.sycj       is '099实验成绩';
+comment on column cjqrxshcb.qmcj       is '099期末成绩';
+comment on column cjqrxshcb.ycj        is '099原成绩';
+comment on column cjqrxshcb.xcj        is '099新成绩';
+comment on column cjqrxshcb.sqly       is '099申请理由';
+comment on column cjqrxshcb.hcnr       is '099核查内容'; 
+comment on column cjqrxshcb.jshc       is '099教师核查'; 
+comment on column cjqrxshcb.jsyj       is '099教师建议';  
+comment on column cjqrxshcb.xyhc       is '099学院核查'; 
+comment on column cjqrxshcb.xyyj       is '099学院建议';
+comment on column cjqrxshcb.jsxm       is '099教师姓名';
+comment on column cjqrxshcb.xyhcr      is '099学院核查人';
+comment on column cjqrxshcb.jwchcr     is '099教务处核查人';
+comment on column cjqrxshcb.bczt       is '099保存状态';
+
+alter table cjb add xsqr varchar2(4);
+commit;
+------end
+
+
+-----xzm-06-02-25-begin---
+alter table xxmc add djksmc_fbfz varchar2(50);
+commit;
+comment on column xxmc.djksmc_fbfz is 'N06等级考试成绩非百分制的名称 如：英语四级,英语六级';
+commit;
+
+alter table kcdmb add khfs varchar2(20);
+alter table kcdmb add kcgs varchar2(50);
+commit;
+alter table cjqrxshcb modify xkkh varchar2(50);
+commit;
+----end
+
+
+
+--cyf-2006-02-28--begin--
+alter table cjb add (tzf_bf varchar2(20));
+update cjb set tzf_bf=tzf,tzf='';
+alter table cjb modify(tzf varchar2(20));
+update cjb set tzf=tzf_bf;
+alter table cjb drop (tzf_bf);
+commit;
+
+--end--
+
+
+----xzm-2006-02-28---begin--
+alter table bkmdb add tjqr varchar2(20);
+commit;
+----end
+
+
+

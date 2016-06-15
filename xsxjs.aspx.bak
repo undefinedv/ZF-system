@@ -1,0 +1,81 @@
+<%@ Page Language="vb" AutoEventWireup="false" Codebehind="xsxjs.aspx.vb" Inherits="zjdx.xsxjs_code"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+	<HEAD>
+		<TITLE>现代教务管理系统-->WEB服务学生选教师</TITLE>
+		<META http-equiv="Content-Type" content="text/html; charset=gb2312">
+		<META content="Microsoft Visual Studio.NET 7.0" name="GENERATOR">
+		<META content="Visual Basic 7.0" name="CODE_LANGUAGE">
+		<META content="JavaScript" name="vs_defaultClientScript">
+		<META content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema">
+		<LINK href="Default.css" type="text/css" rel="stylesheet">
+		<SCRIPT language="javascript">
+		    <!--
+            function jcgl(ydjc){
+		        //if (ydjc.length==1) {
+			    //    document.xsxjs_form.RadioButtonList1(1).checked=true;
+			    //    document.xsxjs_form.RadioButtonList1(1).readonly=true;
+	    	    //}
+		    }
+		    //-->
+		</SCRIPT>
+	</HEAD>
+	<BODY background="tpml/BKGRD9.JPG" onload="window.focus();" MS_POSITIONING="GridLayout">
+		<FORM id="xsxjs_form" method="post" runat="server">
+			<ASP:LABEL id="Label1" style="PADDING-RIGHT: 3pt; PADDING-LEFT: 3pt; PADDING-BOTTOM: 3pt; PADDING-TOP: 3pt"
+				runat="server" Width="100%" BackColor="#C0FFC0" BorderColor="Silver" BorderStyle="Solid"
+				BorderWidth="1" EnableViewState="False">课程名称：  学分：  开班数：</ASP:LABEL><BR>
+			<TABLE id="xjs_table" borderColor="#b0b0b0" cellSpacing="0" cellPadding="3" width="100%"
+				border="1">
+				<TR bgColor="#6699ff">
+					<TD style="HEIGHT: 62px" width="60">教师姓名</TD>
+					<TD style="HEIGHT: 62px" width="100">职称/教学班名称</TD>
+					<TD style="HEIGHT: 62px" width="50">周学时</TD>
+					<TD style="HEIGHT: 62px" width="40">考核</TD>
+					<TD style="HEIGHT: 62px" width="20%">上课时间</TD>
+					<TD style="HEIGHT: 62px" width="15%">上课地点</TD>
+					<TD style="HEIGHT: 62px" width="60">校区</TD>
+					<TD style="HEIGHT: 62px" width="40">容量(人数)</TD>
+					<TD style="HEIGHT: 62px" width="10%">教材名称</TD>
+					<TD style="HEIGHT: 62px" width="40">本专业已选人数</TD>
+					<TD style="HEIGHT: 62px" width="40">所有已选人数</TD>
+					<TD style="HEIGHT: 62px" width="40">选择情况</TD>
+				</TR>
+				<%dim k as integer
+				for k=1 to UBound(xjs, 2)%>
+				<TR>
+					<TD><A onclick="window.open('jsxx.aspx?xkkh=<%=xjs(9,k)%>&amp;jszgh=<%=xjs(12,k)%>','jsxx','toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=0,width=540,height=450,left=120,top=60')" href="#" ><%=xjs(1,k)%></A></TD>
+					<TD><%=xjs(2,k)%></TD>
+					<TD><%=xjs(3,k)%></TD>
+					<TD><%=xjs(4,k)%></TD>
+					<TD><%=xjs(5,k)%></TD>
+					<TD><%=xjs(6,k)%></TD>
+					<TD><%=xjs(13,k)%></TD>
+					<TD><%=xjs(7,k)%></TD>
+					<TD><%=xjs(8,k)%></TD>
+					<TD><%=xjs(10,k)%></TD>
+					<TD><%=xjs(11,k)%></TD>
+					<TD><%if xjs(0, k) = "1"%>
+						<INPUT onclick="jcgl('<%=xjs(8,k)%>')" type=radio CHECKED value="<%=xjs(9,k)%>" name=xkkh>
+						<%else%>
+						<INPUT onclick="jcgl('<%=xjs(8,k)%>')" type=radio value="<%=xjs(9,k)%>"         name=xkkh>
+						<%end if%>
+					</TD>
+				</TR>
+				<%next%>
+			</TABLE>
+			<TABLE id="Table2" cellSpacing="0" cellPadding="0" width="100%" runat="server">
+				<TR>
+					<TD style="HEIGHT: 40px" align="center"><ASP:RADIOBUTTONLIST id="RadioButtonList1" runat="server" RepeatDirection="Horizontal">
+							<asp:ListItem Value="1">是</asp:ListItem>
+							<asp:ListItem Value="0" selected>否预订教材</asp:ListItem>
+						</ASP:RADIOBUTTONLIST></TD>
+				</TR>
+				<TR>
+					<TD align="center"><ASP:BUTTON id="btnSelect" style="CURSOR: default" runat="server" EnableViewState="False" Text="  选定  "></ASP:BUTTON><BUTTON id="Button1" style="DISPLAY: none" type="button" runat="server"></BUTTON>
+						<ASP:BUTTON id="Button3" runat="server" EnableViewState="False" Text="  删除  "></ASP:BUTTON><ASP:BUTTON id="Button2" runat="server" EnableViewState="False" Text="  关闭  "></ASP:BUTTON></TD>
+				</TR>
+			</TABLE>
+		</FORM>
+	</BODY>
+</HTML>

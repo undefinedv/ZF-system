@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<title>留言板</title>
+		<meta name="vs_defaultClientScript" content="JavaScript">
+		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+		<meta name="GENERATOR" content="Microsoft Visual Studio .NET 7.1">
+		<meta name="ProgId" content="VisualStudio.HTML">
+		<meta name="Originator" content="Microsoft Visual Studio .NET 7.1">
+		<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+		<link href="lyb/Style.css" type="text/css" rel="stylesheet" media="all">
+		<script language="javascript" src="Ajax.js"></script>
+	</head>
+	<body>
+		<div id="head">欢迎光临教学管理信息系统留言板！</div>
+		<div id="container">
+			<div id="read">
+				<div id="pageList"></div>
+				<div id="bookList"></div>
+			</div>
+			<div id="sidebar">
+				<div id="write">
+					<div id="qxly">签写留言</div>
+					<div id="form">
+						<form ID="Form1">
+							<table width="770" align="center" class=tb>
+								<tr>
+									<th align="right" width="200">昵称：</th>
+									<td><input type="text" maxlength="20" id="username" size="12" class="input" NAME="username"><span class="tip">*</span></td>
+								</tr>
+								<tr style="display:none">
+									<th align="right">性别：</td>
+									<td><input type="radio" name="sex" value="BOY" ID="Radio1">男<input type="radio" name="sex" value="GIRL" ID="Radio2">女<input type="radio" name="sex" value="NONE" checked ID="Radio3">保密</td>
+								</tr>
+								<tr>
+									<th align="right">&nbsp;Q&nbsp;Q：</th>
+									<td><input type="text" maxlength="10" id="qq" size="12" class="input" NAME="qq"></td>
+								</tr>
+								<tr>
+									<th align="right">信箱：</th>
+									<td><input type="text" id="email" name="email" size="12" class="input"></td>
+								</tr>
+								<tr>
+									<th align="right" valign="top">留言：</th>
+									<td><textarea id="content" name="content" cols="50" rows="10"></textarea>
+									<span class="tip">*</span></td>
+								</tr>
+								<tr align="center" id="send">
+								  <td>&nbsp;</td>
+								  <td><input type="button" onClick="sendJS();" value="留 言" class="button" id="submit" name="submit">
+							      <input type="reset" value="重 置" class="button" id="Reset1" name="Reset1"></td>
+								</tr>
+							</table>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

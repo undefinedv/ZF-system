@@ -1,0 +1,93 @@
+ Sub tocjbhdd()
+        Dim strXkkh As String
+        strXkkh = Request.QueryString("xkkh")
+        Dim zhj As New mmtp
+        Dim xxmc As String
+        Dim xn As String = strXkkh.Substring(1, 9)
+        Dim xq As String = strXkkh.Substring(11, 1)
+        Dim FileName As String
+        FileName = "excel/" & strXkkh & "cjhdd.xls"
+        Dim cou As Integer
+        If File.Exists(Server.MapPath(FileName)) Then
+            File.Delete(Server.MapPath(FileName))
+        End If
+        File.Copy(Server.MapPath("tpml/cjhdd.xls"), Server.MapPath(FileName))
+        Dim xlApp As New Excel.Application
+        Dim xlBook As Excel.Workbook = xlApp.Workbooks.Open(Server.MapPath(FileName))
+        Dim xlSheet As Excel.Worksheet = CType(xlBook.Worksheets("sheet1"), Excel.Worksheet)
+
+        xxmc = "" & str_xxmc & xn & "学年第" & xq & "学期成绩核对单(不能存档！)"
+        xlSheet.Cells(1, 1) = xxmc
+
+        'Dim str_xx As String
+        'str_xx = "选课课号：" + strXkkh
+        'str_xx = str_xx & "||" & "教师姓名：" & jsxm.Text & ""
+        'str_xx = str_xx & "||" & "课程名称：" & kcmc.Text & ""
+        'xlSheet.Cells(2, 1) = str_xx
+
+        xlSheet.Cells(2, 1) = "选课课号：" + strXkkh
+        xlSheet.Cells(2, 5) = jsxm.Text
+        xlSheet.Cells(2, 7) = kcmc.Text
+
+        xlSheet.Cells(3, 1) = "'" & DataGrid1.Columns(0).HeaderText.Replace("&nbsp;", "")
+        xlSheet.Cells(3, 2) = "'" & DataGrid1.Columns(1).HeaderText.Replace("&nbsp;", "")
+        xlSheet.Cells(3, 3) = "'" & DataGrid1.Columns(2).HeaderText.Replace("&nbsp;", "")
+        xlSheet.Cells(3, 4) = "'" & DataGrid1.Columns(3).HeaderText.Replace("&nbsp;", "")
+        xlSheet.Cells(3, 5) = "'" & DataGrid1.Columns(4).HeaderText.Replace("&nbsp;", "")
+        xlSheet.Cells(3, 6) = "'" & DataGrid1.Columns(5).HeaderText.Replace("&nbsp;", "")
+        xlSheet.Cells(3, 7) = "'" & DataGrid1.Columns(6).HeaderText.Replace("&nbsp;", "")
+        xlSheet.Cells(3, 8) = "'" & DataGrid1.Columns(7).HeaderText.Replace("&nbsp;", "")
+        xlSheet.Cells(3, 9) = "'" & DataGrid1.Columns(8).HeaderText.Replace("&nbsp;", "")
+        xlSheet.Cells(3, 10) = "'" & DataGrid1.Columns(9).HeaderText.Replace("&nbsp;", "")
+
+        Dim i As Integer
+        If jfz.SelectedIndex = 0 Then
+            For i = 0 To DataGrid1.Items.Count - 1
+                xlSheet.Cells(i + 4, 1) = "'" & GetBjmc(DataGrid1.Items(i).Cells(0).Text.Replace("&nbsp;", ""))
+                xlSheet.Cells(i + 4, 2) = "'" & DataGrid1.Items(i).Cells(1).Text.Replace("&nbsp;", "")
+                xlSheet.Cells(i + 4, 3) = "'" & DataGrid1.Items(i).Cells(2).Text.Replace("&nbsp;", "")
+                xlSheet.Cells(i + 4, 4) = "'" & CType(DataGrid1.Items(i).FindControl("ps"), TextBox).Text.Replace("&nbsp;", "")
+                xlSheet.Cells(i + 4, 5) = "'" & CType(DataGrid1.Items(i).FindControl("qz"), TextBox).Text.Replace("&nbsp;", "")
+                xlSheet.Cells(i + 4, 6) = "'" & CType(DataGrid1.Items(i).FindControl("qm"), TextBox).Text.Replace("&nbsp;", "")
+                xlSheet.Cells(i + 4, 7) = "'" & CType(DataGrid1.Items(i).FindControl("sy"), TextBox).Text.Replace("&nbsp;", "")
+                xlSheet.Cells(i + 4, 8) = "'" & CType(DataGrid1.Items(i).FindControl("zp"), TextBox).Text.Replace("&nbsp;", "")
+                xlSheet.Cells(i + 4, 9) = "'" & CType(DataGrid1.Items(i).FindControl("bz"), TextBox).Text.Replace("&nbsp;", "")
+                xlSheet.Cells(i + 4, 10) = "'" & DataGrid1.Items(i).Cells(9).Text.Replace("&nbsp;", "")
+            Next
+        Else
+            For i = 0 To DataGrid1.Items.Count - 1
+                xlSheet.Cells(i + 4, 1) = "'" & GetBjmc(DataGrid1.Items(i).Cells(0).Text.Replace("&nbsp;", ""))
+                xlSheet.Cells(i + 4, 2) = "'" & DataGrid1.Items(i).Cells(1).Text.Replace("&nbsp;", "")
+                xlSheet.Cells(i + 4, 3) = "'" & DataGrid1.Items(i).Cells(2).Text.Replace("&nbsp;", "")
+                xlSheet.Cells(i + 4, 4) = "'" & CType(DataGrid1.Items(i).FindControl("dps"), DropDownList).SelectedItem.Text.Replace("&nbsp;", "")
+                xlSheet.Cells(i + 4, 5) = "'" & CType(DataGrid1.Items(i).FindControl("dps"), DropDownList).SelectedItem.Text.Replace("&nbsp;", "")
+                xlSheet.Cells(i + 4, 6) = "'" & CType(DataGrid1.Items(i).FindControl("dps"), DropDownList).SelectedItem.Text.Replace("&nbsp;", "")
+                xlSheet.Cells(i + 4, 7) = "'" & CType(DataGrid1.Items(i).FindControl("dps"), DropDownList).SelectedItem.Text.Replace("&nbsp;", "")
+                xlSheet.Cells(i + 4, 8) = "'" & CType(DataGrid1.Items(i).FindControl("dps"), DropDownList).SelectedItem.Text.Replace("&nbsp;", "")
+                xlSheet.Cells(i + 4, 9) = "'" & CType(DataGrid1.Items(i).FindControl("dps"), DropDownList).SelectedItem.Text.Replace("&nbsp;", "")
+                xlSheet.Cells(i + 4, 10) = "'" & DataGrid1.Items(i).Cells(9).Text.Replace("&nbsp;", "")
+            Next
+
+        End If
+        xlSheet.Range(xlSheet.Cells(4, 1), xlSheet.Cells(DataGrid1.Items.Count + 3, 10)).Borders.LineStyle = Excel.XlLineStyle.xlContinuous
+        xlApp.Visible = False
+        xlBook.Save()
+        Dim filename2 As String
+        filename2 = "excel/" & strXkkh & "cjhdd2.html"
+        If File.Exists(Server.MapPath(filename2)) Then
+            File.Delete(Server.MapPath(filename2))
+        End If
+        xlBook.SaveAs(Server.MapPath(filename2), Excel.XlFileFormat.xlHtml, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Excel.XlSaveAsAccessMode.xlNoChange, Type.Missing, Type.Missing, Type.Missing, Type.Missing)
+        xlBook.Close(True, Server.MapPath(FileName), True)
+        xlBook = Nothing
+        xlApp = Nothing
+        xlSheet = Nothing
+        Response.Write("<script>window.open('tocjbhdd.aspx?filename=" & filename2 & "','输出到成绩核对单','toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=0,width=1015,height=700,left=0,top=0')</script>")
+        'Response.Write("<script language='javascript'>function window.onload(){window.open('RedirectToExcel.aspx?ExcelName=excel/" & strXkkh & "dmc.xls','Excel','status=no,toolbar=no,menubar=yes,location=no,resizable=yes');CloseExportWin();}</script>")
+    End Sub
+
+
+    '提交
+    Private Sub Button5_ServerClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.ServerClick
+        save(1)
+    End Sub

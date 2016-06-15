@@ -1,0 +1,44 @@
+对象名称：CheckPassword
+
+---------------------------------------------------------------------------------------------
+具体的方法：
+学生密码检测：XSCheckPassword(ByVal strXH As String, ByVal strPassword As String) 
+教师密码检测：JSCheckPassword(ByVal strJSBH As String, ByVal strPassword As String) 
+部门密码检测：BMCheckPassword(ByVal strYHM As String, ByVal strPassword As String) 
+
+返回值：
+0:正确
+1:输入的教师编号为空
+2:输入的密码为空
+3:用户不存在
+4:用户表中密码为空，请先初始化
+5:密码错误
+
+
+---------------------------------------------------------------------------------------------
+正方财务接口检测： zfcwjk(ByVal strxn As String, ByVal strxq As String, ByVal strxh As String, ByVal strjfyf As String, ByVal strsfycjf As String,ByVal strjfjkmm As String) 
+ByVal strxn As String		学年
+ByVal strxq As String		学期
+ByVal strxh As String		学号
+ByVal strjfyf As String		交费与否
+ByVal strsfycjf As String       是否完全交费
+ByVal strjfjkmm As String	缴费接口密码
+
+
+返回值：
+0:更新成功
+1:输入的学号为空
+2:学号不存在xsjbxxb中
+3:交费与否格式不正确 是  否
+4:是否完全交费格式不正确 是  否
+5:学年信息不存在xnxxb中
+6:学期格式不正确   1  2
+7:增加处理失败
+8:修改处理失败
+9.缴费接口密码不正确 
+10.不允许出现交费与否=“否”，是否完全交费=“是”
+
+————————————————————————————————————————————
+正方学生信息 ：zfxsxx(ByVal strxh As String, ByVal strxscxjkmm As String) As DataSet  
+ByVal strxh As String           学号
+ByVal strxscxjkmm As String     学生查询借口密码

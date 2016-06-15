@@ -1,0 +1,51 @@
+body {
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+    font-family: verdana, arial, helvetica, sans-serif,??;
+	color: #000;
+	background-color: #fff;
+	text-align: center;
+	font-size: 12px;
+}
+td {
+	font-size: 12px;
+}
+th {
+	font-size: 12px;
+}
+strong, b {
+	font-weight: bold;
+	}
+img {
+	border: 0;
+	}
+	}
+#login {
+	text-align: center;
+	padding: 0px;
+	margin: 0px;
+    width:559px;
+	position:relative;
+	top:100px;
+	}
+
+#denglu{
+    width:559px;
+	height:100px;
+	background: url(../images/bslogin_04.gif) transparent no-repeat;
+	}
+.textbox{
+	height: 14px; 
+	border:1px solid #003366;
+	}
+.button{
+	border:#002D96 1px solid;
+	padding:2px 0px 0px 2px;
+	filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, 
+StartColorStr=#FFFFFF,EndColorStr=#9DBCEA);
+	cursor:hand;
+	color:#003366;
+	font:12px;
+	margin:0px 2px;
+	height:20px;
+	}

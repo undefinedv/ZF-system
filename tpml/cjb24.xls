@@ -1,0 +1,320 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:x="urn:schemas-microsoft-com:office:excel"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=GB2312">
+<meta name=ProgId content=Excel.Sheet>
+<meta name=Generator content="Microsoft Excel 9">
+<link rel=File-List href="./cjb24.files/filelist.xml">
+<link rel=Edit-Time-Data href="./cjb24.files/editdata.mso">
+<link rel=OLE-Object-Data href="./cjb24.files/oledata.mso">
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>xky</o:Author>
+  <o:LastAuthor>zfsoft</o:LastAuthor>
+  <o:LastPrinted>2006-01-07T06:37:55Z</o:LastPrinted>
+  <o:Created>2002-05-27T17:51:00Z</o:Created>
+  <o:LastSaved>2006-01-14T07:42:56Z</o:LastSaved>
+  <o:Company>zydn</o:Company>
+  <o:Version>9.2812</o:Version>
+ </o:DocumentProperties>
+ <o:OfficeDocumentSettings>
+  <o:DownloadComponents/>
+  <o:LocationOfComponents HRef="file:///E:/msowc.cab"/>
+ </o:OfficeDocumentSettings>
+</xml><![endif]-->
+<style>
+<!--table
+	{mso-displayed-decimal-separator:"\.";
+	mso-displayed-thousand-separator:"\,";}
+@page
+	{mso-footer-data:"&L教师&\0022Times New Roman\,常规\0022_\(&\0022宋体\,常规\0022签章&\0022Times New Roman\,常规\0022\)\000A&\0022宋体\,常规\0022系、部、中心主任&\0022Times New Roman\,常规\0022_\(&\0022宋体\,常规\0022签章&\0022Times New Roman\,常规\0022\)&C&\0022Times New Roman\,常规\0022&P\/&N&R教研室主任&\0022Times New Roman\,常规\0022_\(&\0022宋体\,常规\0022签章&\0022Times New Roman\,常规\0022\)\000A&\0022宋体\,常规\0022年月日&\0022Times New Roman\,常规\0022\000A";
+	margin:.98in .39in .98in .98in;
+	mso-header-margin:.51in;
+	mso-footer-margin:.51in;}
+tr
+	{mso-height-source:auto;
+	mso-ruby-visibility:none;}
+col
+	{mso-width-source:auto;
+	mso-ruby-visibility:none;}
+br
+	{mso-data-placement:same-cell;}
+.style0
+	{mso-number-format:General;
+	text-align:general;
+	vertical-align:bottom;
+	white-space:nowrap;
+	mso-rotate:0;
+	mso-background-source:auto;
+	mso-pattern:auto;
+	color:windowtext;
+	font-size:9.0pt;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:宋体;
+	mso-generic-font-family:auto;
+	mso-font-charset:134;
+	border:none;
+	mso-protection:locked visible;
+	mso-style-name:常规;
+	mso-style-id:0;}
+td
+	{mso-style-parent:style0;
+	padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	mso-ignore:padding;
+	color:windowtext;
+	font-size:9.0pt;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:宋体;
+	mso-generic-font-family:auto;
+	mso-font-charset:134;
+	mso-number-format:General;
+	text-align:general;
+	vertical-align:bottom;
+	border:none;
+	mso-background-source:auto;
+	mso-pattern:auto;
+	mso-protection:locked visible;
+	white-space:nowrap;
+	mso-rotate:0;}
+.xl24
+	{mso-style-parent:style0;
+	text-align:center;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;}
+.xl25
+	{mso-style-parent:style0;
+	font-size:11.0pt;
+	text-align:center;}
+.xl26
+	{mso-style-parent:style0;
+	font-size:11.0pt;
+	border-top:none;
+	border-right:none;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;}
+.xl27
+	{mso-style-parent:style0;
+	text-align:center;
+	border-top:.5pt solid windowtext;
+	border-right:.5pt solid windowtext;
+	border-bottom:none;
+	border-left:.5pt solid windowtext;}
+.xl28
+	{mso-style-parent:style0;
+	text-align:center;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid black;
+	border-left:.5pt solid windowtext;}
+.xl29
+	{mso-style-parent:style0;
+	text-align:center;
+	border-top:.5pt solid windowtext;
+	border-right:none;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;}
+.xl30
+	{mso-style-parent:style0;
+	text-align:center;
+	border-top:.5pt solid windowtext;
+	border-right:none;
+	border-bottom:.5pt solid windowtext;
+	border-left:.5pt solid windowtext;}
+.xl31
+	{mso-style-parent:style0;
+	text-align:center;
+	border-top:.5pt solid windowtext;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;}
+.xl32
+	{mso-style-parent:style0;
+	text-align:center;
+	border-top:.5pt solid windowtext;
+	border-right:.5pt solid black;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;}
+.xl33
+	{mso-style-parent:style0;
+	text-align:center;}
+ruby
+	{ruby-align:left;}
+rt
+	{color:windowtext;
+	font-size:9.0pt;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:宋体;
+	mso-generic-font-family:auto;
+	mso-font-charset:134;
+	mso-char-type:none;
+	display:none;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <x:ExcelWorkbook>
+  <x:ExcelWorksheets>
+   <x:ExcelWorksheet>
+    <x:Name>Sheet1</x:Name>
+    <x:WorksheetOptions>
+     <x:DefaultRowHeight>225</x:DefaultRowHeight>
+     <x:Print>
+      <x:ValidPrinterInfo/>
+      <x:PaperSizeIndex>13</x:PaperSizeIndex>
+      <x:HorizontalResolution>-3</x:HorizontalResolution>
+      <x:VerticalResolution>200</x:VerticalResolution>
+     </x:Print>
+     <x:Selected/>
+     <x:Panes>
+      <x:Pane>
+       <x:Number>3</x:Number>
+       <x:RangeSelection>A1:L1</x:RangeSelection>
+      </x:Pane>
+     </x:Panes>
+     <x:ProtectContents>False</x:ProtectContents>
+     <x:ProtectObjects>False</x:ProtectObjects>
+     <x:ProtectScenarios>False</x:ProtectScenarios>
+    </x:WorksheetOptions>
+   </x:ExcelWorksheet>
+   <x:ExcelWorksheet>
+    <x:Name>Sheet2</x:Name>
+    <x:WorksheetOptions>
+     <x:DefaultRowHeight>225</x:DefaultRowHeight>
+     <x:ProtectContents>False</x:ProtectContents>
+     <x:ProtectObjects>False</x:ProtectObjects>
+     <x:ProtectScenarios>False</x:ProtectScenarios>
+    </x:WorksheetOptions>
+   </x:ExcelWorksheet>
+   <x:ExcelWorksheet>
+    <x:Name>Sheet3</x:Name>
+    <x:WorksheetOptions>
+     <x:DefaultRowHeight>225</x:DefaultRowHeight>
+     <x:ProtectContents>False</x:ProtectContents>
+     <x:ProtectObjects>False</x:ProtectObjects>
+     <x:ProtectScenarios>False</x:ProtectScenarios>
+    </x:WorksheetOptions>
+   </x:ExcelWorksheet>
+  </x:ExcelWorksheets>
+  <x:WindowHeight>6600</x:WindowHeight>
+  <x:WindowWidth>12000</x:WindowWidth>
+  <x:WindowTopX>0</x:WindowTopX>
+  <x:WindowTopY>1395</x:WindowTopY>
+  <x:ProtectStructure>False</x:ProtectStructure>
+  <x:ProtectWindows>False</x:ProtectWindows>
+ </x:ExcelWorkbook>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1026"/>
+</xml><![endif]-->
+</head>
+
+<body link=blue vlink=purple>
+
+<table x:str border=0 cellpadding=0 cellspacing=0 width=497 style='border-collapse:
+ collapse;table-layout:fixed;width:374pt'>
+ <col width=78 style='mso-width-source:userset;mso-width-alt:3328;width:59pt'>
+ <col width=53 style='mso-width-source:userset;mso-width-alt:2261;width:40pt'>
+ <col width=28 style='mso-width-source:userset;mso-width-alt:1194;width:21pt'>
+ <col width=32 span=2 style='mso-width-source:userset;mso-width-alt:1365;
+ width:24pt'>
+ <col width=28 style='mso-width-source:userset;mso-width-alt:1194;width:21pt'>
+ <col width=82 style='mso-width-source:userset;mso-width-alt:3498;width:62pt'>
+ <col width=52 style='mso-width-source:userset;mso-width-alt:2218;width:39pt'>
+ <col width=27 span=2 style='mso-width-source:userset;mso-width-alt:1152;
+ width:20pt'>
+ <col width=30 style='mso-width-source:userset;mso-width-alt:1280;width:23pt'>
+ <col width=28 style='mso-width-source:userset;mso-width-alt:1194;width:21pt'>
+ <tr height=18 style='height:13.5pt'>
+  <td colspan=12 height=18 class=xl25 width=497 style='height:13.5pt;
+  width:374pt'></td>
+ </tr>
+ <tr height=18 style='height:13.5pt'>
+  <td colspan=12 height=18 class=xl25 style='height:13.5pt'>成绩登记表</td>
+ </tr>
+ <tr height=18 style='height:13.5pt'>
+  <td colspan=12 height=18 class=xl25 style='height:13.5pt'></td>
+ </tr>
+ <tr height=18 style='height:13.5pt'>
+  <td colspan=3 height=18 class=xl26 style='height:13.5pt'>　</td>
+  <td colspan=3 class=xl26>　</td>
+  <td colspan=6 class=xl26>　</td>
+ </tr>
+ <tr height=15 style='height:11.25pt'>
+  <td rowspan=2 height=30 class=xl27 style='border-bottom:.5pt solid black;
+  height:22.5pt;border-top:none'>学号</td>
+  <td rowspan=2 class=xl27 style='border-bottom:.5pt solid black;border-top:
+  none'>姓名</td>
+  <td colspan=4 class=xl30 style='border-right:.5pt solid black;border-left:
+  none'>成绩</td>
+  <td rowspan=2 class=xl27 style='border-bottom:.5pt solid black;border-top:
+  none'>学号</td>
+  <td rowspan=2 class=xl27 style='border-bottom:.5pt solid black;border-top:
+  none'>姓名</td>
+  <td colspan=4 class=xl30 style='border-right:.5pt solid black;border-left:
+  none'>成绩</td>
+ </tr>
+ <tr height=15 style='height:11.25pt'>
+  <td height=15 class=xl24 style='height:11.25pt'>平时</td>
+  <td class=xl24>期中</td>
+  <td class=xl24>期末</td>
+  <td class=xl24>总评</td>
+  <td class=xl24>平时</td>
+  <td class=xl24>期中</td>
+  <td class=xl24>期末</td>
+  <td class=xl24>总评</td>
+ </tr>
+ <tr height=15 style='height:11.25pt'>
+  <td height=15 colspan=12 style='height:11.25pt;mso-ignore:colspan'></td>
+ </tr>
+ <tr height=15 style='height:11.25pt'>
+  <td colspan=5 height=15 class=xl33 style='height:11.25pt'>教师：_______________(签，章)</td>
+  <td colspan=7 class=xl33>考试/查日期：________年____月____日</td>
+ </tr>
+ <tr height=15 style='height:11.25pt'>
+  <td height=15 colspan=12 style='height:11.25pt;mso-ignore:colspan'></td>
+ </tr>
+ <tr height=15 style='height:11.25pt'>
+  <td colspan=5 height=15 class=xl33 style='height:11.25pt'
+  x:str="教研室：_______________(签，章) ">教研室：_______________(签，章)<span
+  style="mso-spacerun: yes">&nbsp;</span></td>
+  <td colspan=7 class=xl33>系主任：_______________(签，章)</td>
+ </tr>
+ <tr height=15 style='height:11.25pt'>
+  <td height=15 colspan=12 style='height:11.25pt;mso-ignore:colspan'></td>
+ </tr>
+ <tr height=15 style='height:11.25pt'>
+  <td height=15 colspan=8 style='height:11.25pt;mso-ignore:colspan'>说明：任课教师应于考试/查后三天内，将本表一式两份报至所在学院。</td>
+  <td colspan=4 style='mso-ignore:colspan'></td>
+ </tr>
+ <![if supportMisalignedColumns]>
+ <tr height=0 style='display:none'>
+  <td width=78 style='width:59pt'></td>
+  <td width=53 style='width:40pt'></td>
+  <td width=28 style='width:21pt'></td>
+  <td width=32 style='width:24pt'></td>
+  <td width=32 style='width:24pt'></td>
+  <td width=28 style='width:21pt'></td>
+  <td width=82 style='width:62pt'></td>
+  <td width=52 style='width:39pt'></td>
+  <td width=27 style='width:20pt'></td>
+  <td width=27 style='width:20pt'></td>
+  <td width=30 style='width:23pt'></td>
+  <td width=28 style='width:21pt'></td>
+ </tr>
+ <![endif]>
+</table>
+
+</body>
+
+</html>
